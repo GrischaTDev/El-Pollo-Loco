@@ -12,7 +12,7 @@ class MovableObject {
         this.img.src = path;
     }
     
-    loadImage(arr) {
+    loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
             img.src = path;

@@ -6,7 +6,7 @@ class Charakter extends MovableObject {
 
     constructor() {
         super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
-        this.loadImage([
+        this.loadImages([
             'img/2_character_pepe/1_idle/idle/I-1.png',
             'img/2_character_pepe/1_idle/idle/I-2.png',
             'img/2_character_pepe/1_idle/idle/I-3.png',
