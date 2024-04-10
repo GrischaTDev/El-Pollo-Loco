@@ -1,10 +1,12 @@
 class MovableObject {
     x;
     y;
-    img;
     width;
     height;
+    speed;
+    img;
     imageCache = {};
+    currentImage = 0;
 
 
     loadImage(path) {
@@ -16,7 +18,7 @@ class MovableObject {
         arr.forEach((path) => {
             let img = new Image();
             img.src = path;
-            this.imageCache[path] = path;
+            this.imageCache[path] = img;
         });
     }
 
@@ -25,6 +27,8 @@ class MovableObject {
     }
 
     moveLeft() {
-        this.x -= 0.2;
+        setInterval(() => {
+            this.x -= this.speed;
+        }, 1000 / 60);
     }
 }

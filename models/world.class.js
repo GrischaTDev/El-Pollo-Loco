@@ -26,7 +26,7 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
+
         this.addObjectsToMap(this.backgroundObjects);
         this.addToMap(this.charakter);
         this.addObjectsToMap(this.enemies);
