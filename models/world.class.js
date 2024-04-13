@@ -31,18 +31,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
 
         this.ctx.translate(-this.camera_x, 0);
-        // // Wolken bewegen 
-        // this.clouds.forEach(cloud => {
-        //     cloud.moveLeft();  // update the clouds position
-        //     this.addToMap(cloud);
-  
-        //     // Wolken vom Anfang zurücksetzen, wenn sie vom Bildschirm verschwinden
-        //     if (cloud.x < -cloud.width) {
-        //     cloud.x = this.canvas.width; 
-        //     }
-        // });
 
-        // Draw() wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function() {
             self.draw();
