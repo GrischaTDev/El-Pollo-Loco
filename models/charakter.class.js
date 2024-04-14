@@ -40,7 +40,7 @@ class Charakter extends MovableObject {
     constructor() {
         super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
         this.x = 80;
-        this.y = 80;
+        this.y = 180;
         this.width = 130;
         this.height = 250;
         this.speed = 5;
@@ -63,19 +63,17 @@ class Charakter extends MovableObject {
         setInterval(() => {
             this.walking_sound.pause();
             if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
-                this.x += this.speed;
-                this.otherDirection = false;
+                this.moveRight();
                 this.walking_sound.play();
             }
 
             if (this.world.keyboard.left && this.x > 0) {
-                this.x -= this.speed;
-                this.otherDirection = true;
+                this.moveLeft();
                 this.walking_sound.play();
             } 
 
-            if (this.world.keyboard.space && this.isAboveGround()) {
-                this.speedY = 20;
+            if (this.world.keyboard.space && !this.isAboveGround()) {
+                this.jump();
             }
 
             this.world.camera_x = -this.x + 100;
@@ -90,10 +88,5 @@ class Charakter extends MovableObject {
                 }
             }
         }, 80);
-    }
-
-
-    jump() {
-
     }
 }
