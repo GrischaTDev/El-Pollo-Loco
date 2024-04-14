@@ -31,7 +31,7 @@ class MovableObject {
         this.img = new Image();
         this.img.src = path;
     }
-    
+
 
     loadImages(arr) {
         arr.forEach((path) => {
@@ -42,15 +42,29 @@ class MovableObject {
     }
 
 
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+
+
+    drawFrameBorder(ctx) {
+        if (this instanceof Charakter || this instanceof Chicken) {
+            ctx.beginPath();
+            ctx.lineWidth = '5';
+            ctx.strokeStyle = "blue";
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
+    }
+
+
     moveRight() {
         this.x += this.speed;
-        this.otherDirection = false;
     }
 
 
     moveLeft() {
         this.x -= this.speed;
-        this.otherDirection = false;
     }
 
 
