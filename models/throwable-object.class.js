@@ -21,9 +21,9 @@ class ThrowableObject extends MovableObject {
 
     animate() {
         setInterval(() => {
-            // Move right
             if (this.world.keyboard.d) {
                 this.moveRight();
+                this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
