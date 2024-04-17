@@ -22,17 +22,6 @@ class MovableObject extends DrawableObject {
     }
 
 
-    drawFrameBorder(ctx) {
-        if (this instanceof Charakter || this instanceof Chicken) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = "blue";
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
-
-
     moveRight() {
         this.x += this.speed;
     }
@@ -73,7 +62,7 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    
+
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000; 
