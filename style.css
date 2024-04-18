@@ -1,9 +1,32 @@
+@font-face {
+    font-family: 'Zabars';
+    src: url(./fonts/Zabars.ttf) format('truetype');
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    background-image: url(./img/desert.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+h1 {
+    font-family: 'Zabars', Arial, Helvetica, sans-serif;
+    font-size: 64px;
+    letter-spacing: 3px;
 }
 
 canvas {
-    background-color: wheat;
+    display: block;
+}
+
+@media only screen and (min-width: 900px) {
+    canvas {
+        width: 60%;
+    }
 }
