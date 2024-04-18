@@ -47,6 +47,14 @@ class World {
                 console.log('Charakter, energy', this.charakter.energy);
             }
         });
+
+        this.level.coins.forEach((coins) => {
+            if (this.charakter.isColliding(coins)) {
+                // this.charakter.hit();
+                this.statusBarCoin.setPercentage(this.charakter.coins);
+                console.log('Charakter Coins', this.charakter.coins);
+            }
+        });
     }
 
 
