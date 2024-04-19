@@ -67,6 +67,14 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    collectCoin() {
+        this.coins += 1;
+        // if (this.coins < 0) {
+        //     this.coins = 0;
+        // } else {
+        // }
+    }
+
 
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;

@@ -50,9 +50,12 @@ class World {
 
         this.level.coins.forEach((coins) => {
             if (this.charakter.isColliding(coins)) {
-                // this.charakter.hit();
+                this.charakter.collectCoin();
                 this.statusBarCoin.setPercentage(this.charakter.coins);
                 console.log('Charakter Coins', this.charakter.coins);
+                console.log('Münze', coins);
+                coins.x = -3000;
+                coins.collectSound.play()
             }
         });
     }
