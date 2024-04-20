@@ -54,5 +54,12 @@ const level1 = new Level(
     new Coin(1700, 220, 50, 50),
     new Coin(1800, 280, 50, 50),
     new Coin(2900, 180, 200, 200)
+],  
+[
+    new Bottle(250, 350, 80, 80, 'img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
+    new Bottle(800, 350, 80, 80, 'img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+    new Bottle(1090, 350, 80, 80, 'img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
+    new Bottle(1600, 350, 80, 80, 'img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+    new Bottle(1800, 350, 80, 80, 'img/6_salsa_bottle/2_salsa_bottle_on_ground.png')
 ]  
 );

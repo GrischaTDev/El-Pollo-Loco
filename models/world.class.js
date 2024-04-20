@@ -58,6 +58,17 @@ class World {
                 coins.collectSound.play()
             }
         });
+
+        this.level.bottles.forEach((bottles) => {
+            if (this.charakter.isColliding(bottles)) {
+                this.charakter.collectBottle();
+                this.statusBarBottle.setPercentage(this.charakter.bottles);
+                console.log('Charakter Flaschen', this.charakter.bottles);
+                console.log('Tabasko', bottles);
+                bottles.x = -3000;
+                bottles.collectSound.play()
+            }
+        });
     }
 
 
@@ -78,6 +89,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
 
         this.ctx.translate(-this.camera_x, 0); // Back
 

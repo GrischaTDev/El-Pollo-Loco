@@ -24,7 +24,7 @@ class DrawableObject {
 
 
     drawFrameBorder(ctx) {
-        if (this instanceof Charakter || this instanceof Chicken || this instanceof Coin) {
+        if (this instanceof Charakter || this instanceof Chicken || this instanceof Coin || this instanceof Bottle) {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = "blue";
