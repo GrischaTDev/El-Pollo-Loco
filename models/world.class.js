@@ -9,6 +9,7 @@ class World {
     statusBar = new StatusBar();
     statusBarCoin = new StatusBarCoin();
     statusBarBottle = new StatusBarBottle();
+    currentBottles = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -17,6 +18,7 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+
     }
 
 
@@ -33,9 +35,12 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.d) {
+        if (this.keyboard.d && !this.currentBottles == 0) {
             let bottle = new ThrowableObject(this.charakter.x + 100, this.charakter.y + 100);
             this.throwableObject.push(bottle);
+            this.currentBottles--;
+        } else {
+            return;
         }
     }
 
@@ -67,6 +72,7 @@ class World {
                 console.log('Tabasko', bottles);
                 bottles.x = -3000;
                 bottles.collectSound.play()
+                this.currentBottles++;
             }
         });
     }

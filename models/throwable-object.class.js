@@ -13,7 +13,9 @@ class ThrowableObject extends MovableObject {
         this.y = y;
         this.width = 80;
         this.height = 80;
+        this.loadImages(this.IMAGES_BOTTLE_ROTATION);
         this.trow(x, y);
+        this.animate();
     }
 
     trow(x, y) {
@@ -22,6 +24,13 @@ class ThrowableObject extends MovableObject {
         setInterval(() => {
             this.x += 10;
         }, 25);
+    }
+
+    animate() {
+        setInterval(() => {
+            let i = this.currentImage % this.IMAGES_BOTTLE_ROTATION.length;
+            this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
+        }, 100);
     }
 
 }
