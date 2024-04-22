@@ -105,13 +105,17 @@ class Charakter extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-            } else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
             } else {
                 if (this.world.keyboard.right || this.world.keyboard.left) {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
         }, 80);
+
+        setInterval(() => {
+            if (this.isAboveGround()) {
+                this.playAnimation(this.IMAGES_JUMPING);
+            }
+        }, 110);
     }
 }

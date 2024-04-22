@@ -1,4 +1,4 @@
-class Bottle extends MovableObject {
+class Bottle extends DrawableObject {
     collectSound = new Audio('audio/collect.mp3');
     
     constructor(x, y, height, width, img) {

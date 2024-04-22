@@ -9,7 +9,8 @@ class World {
     statusBar = new StatusBar();
     statusBarCoin = new StatusBarCoin();
     statusBarBottle = new StatusBarBottle();
-    currentBottles = 0;
+    coins = 0;
+    bottles = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -34,15 +35,18 @@ class World {
         }, 200);
     }
 
+
     checkThrowObjects() {
-        if (this.keyboard.d && !this.currentBottles == 0) {
+        if (this.keyboard.d && !this.bottles == 0) {
             let bottle = new ThrowableObject(this.charakter.x + 100, this.charakter.y + 100);
             this.throwableObject.push(bottle);
-            this.currentBottles--;
+            this.bottles--;
+            this.statusBarBottle.setPercentage(this.bottles);
         } else {
             return;
         }
     }
+
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
@@ -55,26 +59,35 @@ class World {
 
         this.level.coins.forEach((coins) => {
             if (this.charakter.isColliding(coins)) {
-                this.charakter.collectCoin();
-                this.statusBarCoin.setPercentage(this.charakter.coins);
-                console.log('Charakter Coins', this.charakter.coins);
-                console.log('Münze', coins);
+                this.collectCoin();
+                this.statusBarCoin.setPercentage(this.coins);
+                console.log('Charakter Coins', this.coins);
+                console.log('Münze', this.coins);
                 coins.x = -3000;
                 coins.collectSound.play()
             }
         });
 
-        this.level.bottles.forEach((bottles) => {
-            if (this.charakter.isColliding(bottles)) {
-                this.charakter.collectBottle();
-                this.statusBarBottle.setPercentage(this.charakter.bottles);
-                console.log('Charakter Flaschen', this.charakter.bottles);
-                console.log('Tabasko', bottles);
-                bottles.x = -3000;
-                bottles.collectSound.play()
-                this.currentBottles++;
+        this.level.bottles.forEach((currentBottle) => {
+            if (this.charakter.isColliding(currentBottle)) {
+                this.collectBottle();
+                this.statusBarBottle.setPercentage(this.bottles);
+                console.log('Charakter Flaschen', this.bottles);
+                console.log('Tabasko', this.bottles);
+                currentBottle.x = -3000;
+                currentBottle.collectSound.play()
             }
         });
+    }
+
+
+    collectCoin() {
+        this.coins += 1;
+    }
+
+    
+    collectBottle() {
+        this.bottles += 1;
     }
 
 

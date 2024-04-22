@@ -1,12 +1,11 @@
+let startScreen;
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let startSound = new Audio('audio/start-background-sound.mp3');
 
 function init() {
-    canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
-
-    console.log('My Charakter is', world.charakter);
+    loadStartScreen();
 }
 
 
@@ -40,3 +39,42 @@ window.addEventListener('keyup', (event) => {
         keyboard.d = false;
     }
 })
+
+
+function loadStartScreen() {
+    startScreen = document.getElementById('start-screen');
+    startScreen.innerHTML = /* html */ `
+    <div class="start-btn" onclick="startGame()">Start Game</div>
+    <div class="start-btn" onclick="startGame()">Settings</div>
+    <img id="mute-sound" class="start-sound" onclick="playSound()" src="./img/volume-off.svg" alt="">
+    <img id="play-sound" class="start-sound d-none" onclick="muteSound()" src="./img/volume.svg" alt="">
+    `;
+}
+
+function startGame() {
+    muteSound();
+    startScreen.classList.add('d-none');
+    canvas = document.getElementById('canvas');
+    canvas.classList.remove('d-none');
+    world = new World(canvas, keyboard);
+
+    console.log('My Charakter is', world.charakter);
+}
+
+function playSound() {
+    let playButton = document.getElementById('play-sound');
+    let muteButton = document.getElementById('mute-sound');
+    muteButton.classList.add('d-none');
+    playButton.classList.remove('d-none');
+    startSound.play();
+    startSound.volume = 0.2;
+    startSound.loop = true;
+}
+
+function muteSound() {
+    let playButton = document.getElementById('play-sound');
+    let muteButton = document.getElementById('mute-sound');
+    muteButton.classList.remove('d-none');
+    playButton.classList.add('d-none');
+    startSound.pause();
+}

@@ -4,8 +4,6 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 2.5;
     energy = 100;
-    coins = 0;
-    bottles = 0;
     lastHit = 0;
 
 
@@ -47,7 +45,7 @@ class MovableObject extends DrawableObject {
 
     
     jump() {
-        this.speedY = 27;
+        this.speedY = 25;
     }
 
 
@@ -66,14 +64,6 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
-    }
-
-    collectCoin() {
-        this.coins += 1;
-    }
-
-    collectBottle() {
-        this.bottles += 1;
     }
 
 
