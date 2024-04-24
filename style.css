@@ -27,7 +27,8 @@ h1 {
 
 .start-screen {
     height: 480px;
-    width: 720px;
+    width: 780px;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,9 +44,19 @@ h1 {
 
 .start-sound {
     height: 42px;
-    position: relative;
-    right: -325px;
-    top: -270px;
+    position: absolute;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+.start-sound img {
+    height: 42px;
+    padding: 20px;
+    position: absolute;
     cursor: pointer;
 }
 
@@ -65,12 +76,14 @@ h1 {
     background-color: #feb03b;
     background-size: cover;
     cursor: pointer;
+    z-index: 1;
 }
 
 .start-btn:hover {
     background-color: #ffbf60;
     border: 2px solid black;
     border-bottom: 5px solid black;
+    width: 160px;
 }
 
 canvas {

@@ -44,10 +44,12 @@ window.addEventListener('keyup', (event) => {
 function loadStartScreen() {
     startScreen = document.getElementById('start-screen');
     startScreen.innerHTML = /* html */ `
+    <div class="start-sound">
+        <img id="mute-sound" class="" onclick="playSound()" src="./img/volume-off.svg" alt="">
+        <img id="play-sound" class="d-none" onclick="muteSound()" src="./img/volume.svg" alt="">
+    </div>
     <div class="start-btn" onclick="startGame()">Start Game</div>
     <div class="start-btn" onclick="startGame()">Settings</div>
-    <img id="mute-sound" class="start-sound" onclick="playSound()" src="./img/volume-off.svg" alt="">
-    <img id="play-sound" class="start-sound d-none" onclick="muteSound()" src="./img/volume.svg" alt="">
     `;
 }
 
