@@ -58,6 +58,7 @@ function startGame() {
     startScreen.classList.add('d-none');
     canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
+    initLevel();
     world = new World(canvas, keyboard);
 
     console.log('My Charakter is', world.charakter);
