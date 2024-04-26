@@ -51,7 +51,7 @@ class Charakter extends MovableObject {
     ];
 
 
-    walking_sound = new Audio('/audio/running.mp3');
+    walking_sound = new Audio('audio/running.mp3');
 
     constructor() {
         super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
@@ -94,6 +94,7 @@ class Charakter extends MovableObject {
             } 
             // Jump
             if (this.world.keyboard.space && !this.isAboveGround()) {
+                this.currentImage = 0;
                 this.jump();
             }
 
@@ -101,7 +102,15 @@ class Charakter extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            if (this.isDead()) {
+            if (this.isAboveGround()) {
+                if (this.speedY > 0 && this.currentImage > 3) {
+                    this.currentImage = 3;
+                } 
+                if (this.speedY < 0 && this.currentImage > 4) {
+                    this.currentImage = 7;
+                } 
+                this.playAnimation(this.IMAGES_JUMPING);
+            } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
@@ -111,11 +120,5 @@ class Charakter extends MovableObject {
                 }
             }
         }, 80);
-
-        setInterval(() => {
-            if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
-            }
-        }, 110);
     }
 }

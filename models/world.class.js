@@ -50,10 +50,20 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.charakter.isColliding(enemy)) {
+            if (this.charakter.isColliding(enemy) && this.charakter.speedY == 0) {
                 this.charakter.hit();
                 this.statusBar.setPercentage(this.charakter.energy);
                 console.log('Charakter, energy', this.charakter.energy);
+            }
+            if (this.charakter.isColliding(enemy) && this.charakter.speedY < 0) {
+                console.log('Erwischt!');
+                enemy.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
+                enemy.speed = 0;
+                enemy.stopAnimation();
+                setTimeout(() => {
+                    enemy.x = -3000;
+                }, 2000);
+
             }
         });
 
