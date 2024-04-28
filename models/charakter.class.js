@@ -74,8 +74,10 @@ class Charakter extends MovableObject {
     animate() {
         // IDLE animation
         setInterval(() => {
-            let i = this.currentImage % this.IMAGES_IDLE.length;
-            this.playAnimation(this.IMAGES_IDLE);
+            if (!this.world.keyboard.right && !this.world.keyboard.left) {
+                let i = this.currentImage % this.IMAGES_IDLE.length;
+                this.playAnimation(this.IMAGES_IDLE);
+            }
         }, 300);
 
         // WALK animation
