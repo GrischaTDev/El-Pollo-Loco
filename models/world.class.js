@@ -49,8 +49,15 @@ class World {
 
 
     checkCollisions() {
+        this.checkCollisionEnemys();
+        this.checkCollisionCoins();
+        this.checkCollisionBottles();
+    }
+
+
+    checkCollisionEnemys() {
         this.level.enemies.forEach((enemy) => {
-            if (this.charakter.isColliding(enemy) && this.charakter.speedY == 0) {
+            if (this.charakter.isColliding(enemy) && this.charakter.speedY == 0 && !enemy.chickenIsDead) {
                 this.charakter.hit();
                 this.statusBar.setPercentage(this.charakter.energy);
                 console.log('Charakter, energy', this.charakter.energy);
@@ -60,13 +67,16 @@ class World {
                 enemy.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
                 enemy.speed = 0;
                 enemy.stopAnimation();
+                enemy.chickenIsDead = true;
                 setTimeout(() => {
                     enemy.x = -3000;
                 }, 2000);
-
             }
         });
+    }
 
+
+    checkCollisionCoins() {
         this.level.coins.forEach((coins) => {
             if (this.charakter.isColliding(coins)) {
                 this.collectCoin();
@@ -75,9 +85,13 @@ class World {
                 console.log('Münze', this.coins);
                 coins.x = -3000;
                 coins.collectSound.play()
+                coins.collectSound.volume = 0.5;
             }
         });
+    }
 
+    
+    checkCollisionBottles() {
         this.level.bottles.forEach((currentBottle) => {
             if (this.charakter.isColliding(currentBottle)) {
                 this.collectBottle();
@@ -86,6 +100,7 @@ class World {
                 console.log('Tabasko', this.bottles);
                 currentBottle.x = -3000;
                 currentBottle.collectSound.play()
+                currentBottle.collectSound.volume = 0.5;
             }
         });
     }

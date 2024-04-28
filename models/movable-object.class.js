@@ -12,6 +12,8 @@ class MovableObject extends DrawableObject {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
+            } else {
+                this.speedY = 0;
             }
         }, 1000 / 25);
     }
@@ -58,6 +60,8 @@ class MovableObject extends DrawableObject {
 
 
     hit() {
+        this.hurt_sound.play();
+        this.hurt_sound.volume = 0.5;
         this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;

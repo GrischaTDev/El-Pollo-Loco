@@ -4,6 +4,9 @@ let world;
 let keyboard = new Keyboard();
 let startSound = new Audio('audio/start-background-sound.mp3');
 
+let intervalIDs = [];
+let i = 1;
+
 function init() {
     loadStartScreen();
 }
@@ -80,4 +83,15 @@ function muteSound() {
     muteButton.classList.remove('d-none');
     playButton.classList.add('d-none');
     startSound.pause();
+}
+
+
+function setStoppableInterval(fn, time) {
+    let id = setInterval(fn, time);
+    intervalIDs.push(id);
+}
+
+
+function stopGame() {
+    intervalIDs.forEach(clearInterval);
 }
