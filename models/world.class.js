@@ -67,7 +67,7 @@ class World {
         this.throwableObject.forEach((flasche) => {
             if (this.endboss.isColliding(flasche)) {
                 this.endboss.isEndbossHurt = true;
-                this.endboss.hitEndboss();
+                this.endboss.hit(20);
                 this.endboss.energy;
 
                 console.log('Boss getroffen', this.endboss.energy);
@@ -81,7 +81,9 @@ class World {
     checkCollisionEnemys() {
         this.level.enemies.forEach((enemy) => {
             if (this.charakter.isColliding(enemy) && this.charakter.speedY == 0 && !enemy.chickenIsDead) {
-                this.charakter.hit();
+                this.charakter.hit(5);
+                this.charakter.hurt_sound.play();
+                this.charakter.hurt_sound.volume = 0.5;
                 this.statusBar.setPercentage(this.charakter.energy);
                 console.log('Charakter, energy', this.charakter.energy);
             }
