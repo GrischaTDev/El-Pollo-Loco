@@ -1,6 +1,7 @@
 class World {
     level = level1;
     charakter = new Charakter();
+    endboss = this.level.enemies[0];
     throwableObject = [];
     canvas;
     ctx;
@@ -43,6 +44,9 @@ class World {
             this.throwableObject.push(bottle);
             this.bottles--;
             this.statusBarBottle.setPercentage(this.bottles);
+
+            console.log('Tabasko', this.bottles);
+            console.log('Tabasko Array', this.throwableObject.length);
         } else {
             return;
         }
@@ -53,6 +57,24 @@ class World {
         this.checkCollisionEnemys();
         this.checkCollisionCoins();
         this.checkCollisionBottles();
+        this.checkCollisionEndboss();
+    }
+
+
+    checkCollisionEndboss() {
+        this.endboss = this.level.enemies[0];
+
+        this.throwableObject.forEach((flasche) => {
+            if (this.endboss.isColliding(flasche)) {
+                this.endboss.isEndbossHurt = true;
+                this.endboss.hitEndboss();
+                this.endboss.energy;
+
+                console.log('Boss getroffen', this.endboss.energy);
+            } else {
+                return
+            }
+        });
     }
 
 
@@ -63,6 +85,7 @@ class World {
                 this.statusBar.setPercentage(this.charakter.energy);
                 console.log('Charakter, energy', this.charakter.energy);
             }
+            
             if (this.charakter.isColliding(enemy) && this.charakter.speedY < 0) {
                 console.log('Erwischt!');
                 enemy.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
@@ -97,8 +120,6 @@ class World {
             if (this.charakter.isColliding(currentBottle)) {
                 this.collectBottle();
                 this.statusBarBottle.setPercentage(this.bottles);
-                console.log('Charakter Flaschen', this.bottles);
-                console.log('Tabasko', this.bottles);
                 currentBottle.x = -3000;
                 currentBottle.collectSound.play()
                 currentBottle.collectSound.volume = 0.5;
@@ -127,11 +148,10 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
-        if (this.charakter.x > 2000) {
+        if (this.endboss.isEndbossHurt) {
             this.addToMap(this.statusBarEndboss);
-        }
+        } 
         this.ctx.translate(this.camera_x, 0); // Forwards
-
         this.addToMap(this.charakter);
         this.addObjectsToMap(this.throwableObject);
         this.addObjectsToMap(this.level.enemies);

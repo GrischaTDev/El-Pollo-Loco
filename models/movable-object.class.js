@@ -70,6 +70,17 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    hitEndboss() {
+        // this.hurt_sound.play();
+        // this.hurt_sound.volume = 0.5;
+        this.energy -= 20;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
 
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
