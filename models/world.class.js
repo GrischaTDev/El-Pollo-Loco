@@ -62,17 +62,15 @@ class World {
 
 
     checkCollisionEndboss() {
-        this.endboss = this.level.enemies[0];
+        this.endboss = this.level.enemies.find(enemy => enemy.name === "Endboss");
 
         this.throwableObject.forEach((flasche) => {
             if (this.endboss.isColliding(flasche)) {
                 this.endboss.isEndbossHurt = true;
                 this.endboss.hit(20);
                 this.endboss.energy;
-
+                this.statusBarEndboss.setPercentage(this.endboss.energy);
                 console.log('Boss getroffen', this.endboss.energy);
-            } else {
-                return
             }
         });
     }
