@@ -25,6 +25,40 @@ h1 {
     letter-spacing: 3px;
 }
 
+.win-screen {
+    height: 480px;
+    width: 780px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    background-image: url(img/9_intro_outro_screens/start/startscreen_1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0px 0px 24px -6px black;
+    border-radius: 10px;
+}
+
+.gameover-screen {
+    height: 480px;
+    width: 780px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    background-image: url(img/9_intro_outro_screens/start/startscreen_1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0px 0px 24px -6px black;
+    border-radius: 10px;
+}
+
 .start-screen {
     height: 480px;
     width: 780px;

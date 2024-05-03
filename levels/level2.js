@@ -1,9 +1,9 @@
-let level1;
+let level2;
 function initLevel() {
 
-    level1 = new Level(
+    level2 = new Level(
         [
-            new Chicken(700),
+            // new Chicken(700),
             new Chicken(1250),
             new Chicken(1700),
             new Chicken(2120),

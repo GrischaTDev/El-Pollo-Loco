@@ -1,4 +1,6 @@
 let startScreen;
+let currentLevel;
+let winScreen;
 let canvas;
 let world;
 let keyboard = new Keyboard();
@@ -8,6 +10,8 @@ let intervalIDs = [];
 let i = 1;
 
 function init() {
+    startScreen = document.getElementById('start-screen');
+    winScreen = document.getElementById('win-screen');
     loadStartScreen();
 }
 
@@ -44,8 +48,44 @@ window.addEventListener('keyup', (event) => {
 })
 
 
+function clearAllIntervals() {
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+}
+
+function playAgain() {
+    canvas.classList.remove('d-none');
+    winScreen.classList.add('d-none');
+    world = null;
+    startGame();
+}
+
+function startNextLevel() {
+    canvas.classList.remove('d-none');
+    winScreen.classList.add('d-none');
+    world = null;
+    startGame(level2);
+}
+
+
+function loadWinScreen() {
+    clearAllIntervals();
+    canvas.classList.add('d-none');
+    winScreen.classList.remove('d-none');
+    winScreen.innerHTML = /* html */ `
+    <div class="start-sound">
+        <img id="mute-sound" class="" onclick="playSound()" src="./img/volume-off.svg" alt="">
+        <img id="play-sound" class="d-none" onclick="muteSound()" src="./img/volume.svg" alt="">
+    </div>
+    <div class="start-btn" onclick="startNextLevel(level2)">Next Level</div>
+    <div class="start-btn" onclick="playAgain()">Play again</div>
+    <div class="start-btn" onclick="loadStartScreen()">Back to menu</div>
+    `;
+}
+
+
 function loadStartScreen() {
-    startScreen = document.getElementById('start-screen');
+    winScreen.classList.add('d-none');
+    startScreen.classList.remove('d-none');
     startScreen.innerHTML = /* html */ `
     <div class="start-sound">
         <img id="mute-sound" class="" onclick="playSound()" src="./img/volume-off.svg" alt="">
@@ -56,16 +96,19 @@ function loadStartScreen() {
     `;
 }
 
-function startGame() {
+
+function startGame(currentLevel) {
+    currentLevel = 'level1';
     muteSound();
     startScreen.classList.add('d-none');
     canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
     initLevel();
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard, currentLevel);
 
     console.log('My Charakter is', world.charakter);
 }
+
 
 function playSound() {
     let playButton = document.getElementById('play-sound');
@@ -76,6 +119,7 @@ function playSound() {
     startSound.volume = 0.2;
     startSound.loop = true;
 }
+
 
 function muteSound() {
     let playButton = document.getElementById('play-sound');

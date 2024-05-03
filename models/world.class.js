@@ -14,10 +14,11 @@ class World {
     coins = 0;
     bottles = 0;
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, currentLevel) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.level = currentLevel;
         this.draw();
         this.setWorld();
         this.run();
@@ -53,6 +54,16 @@ class World {
     }
 
 
+    gameOver() {
+        console.log('Du hast verloren!');
+    }
+
+    win() {
+        loadWinScreen();
+        console.log('Du hast gewonnen!');
+    }
+
+
     checkCollisions() {
         this.checkCollisionEnemys();
         this.checkCollisionCoins();
@@ -79,7 +90,6 @@ class World {
         this.endboss.currentHit = true;
         this.endboss.energy;
         this.statusBarEndboss.setPercentage(this.endboss.energy);
-        console.log('Boss getroffen', this.endboss.energy);
 
         setTimeout(() => {
             this.endboss.currentHit = false;
@@ -94,7 +104,6 @@ class World {
             }
             
             if (this.charakter.isColliding(enemy) && this.charakter.speedY < 0) {
-                console.log('Erwischt!');
                 enemy.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
                 enemy.speed = 0;
                 enemy.stopAnimation();
@@ -114,7 +123,9 @@ class World {
         this.charakter.hurt_sound.volume = 0.5;
         this.charakter.currentHit = true;
         this.statusBar.setPercentage(this.charakter.energy);
-        console.log('Charakter, energy', this.charakter.energy);
+        if (this.charakter.energy == 0) {
+            this.gameOver();
+        }
 
         setTimeout(() => {
             this.charakter.currentHit = false;
@@ -127,11 +138,13 @@ class World {
             if (this.charakter.isColliding(coins)) {
                 this.collectCoin();
                 this.statusBarCoin.setPercentage(this.coins);
-                console.log('Charakter Coins', this.coins);
-                console.log('Münze', this.coins);
                 coins.x = -3000;
                 coins.collectSound.play()
                 coins.collectSound.volume = 0.5;
+            }
+            // if (this.coins == 10 &&  this.endboss.energy == 0) {
+            if (this.coins == 1) {
+                this.win();
             }
         });
     }
