@@ -66,24 +66,31 @@ class World {
 
         this.throwableObject.forEach((flasche) => {
             if (this.endboss.isColliding(flasche)) {
-                this.endboss.isEndbossHurt = true;
-                this.endboss.hit(20);
-                this.endboss.energy;
-                this.statusBarEndboss.setPercentage(this.endboss.energy);
-                console.log('Boss getroffen', this.endboss.energy);
+                this.bossHit();
             }
         });
+    }
+
+
+    bossHit() {
+        if (this.endboss.currentHit) return;
+        this.endboss.hit(20);
+        this.endboss.isEndbossHurt = true;
+        this.endboss.currentHit = true;
+        this.endboss.energy;
+        this.statusBarEndboss.setPercentage(this.endboss.energy);
+        console.log('Boss getroffen', this.endboss.energy);
+
+        setTimeout(() => {
+            this.endboss.currentHit = false;
+        }, 1000)
     }
 
 
     checkCollisionEnemys() {
         this.level.enemies.forEach((enemy) => {
             if (this.charakter.isColliding(enemy) && this.charakter.speedY == 0 && !enemy.chickenIsDead) {
-                this.charakter.hit(5);
-                this.charakter.hurt_sound.play();
-                this.charakter.hurt_sound.volume = 0.5;
-                this.statusBar.setPercentage(this.charakter.energy);
-                console.log('Charakter, energy', this.charakter.energy);
+                this.charakterHit();
             }
             
             if (this.charakter.isColliding(enemy) && this.charakter.speedY < 0) {
@@ -97,6 +104,21 @@ class World {
                 }, 2000);
             }
         });
+    }
+
+
+    charakterHit() {
+        if (this.charakter.currentHit) return;
+        this.charakter.hit(5);
+        this.charakter.hurt_sound.play();
+        this.charakter.hurt_sound.volume = 0.5;
+        this.charakter.currentHit = true;
+        this.statusBar.setPercentage(this.charakter.energy);
+        console.log('Charakter, energy', this.charakter.energy);
+
+        setTimeout(() => {
+            this.charakter.currentHit = false;
+        }, 1000)
     }
 
 
