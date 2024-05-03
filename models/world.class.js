@@ -1,5 +1,5 @@
 class World {
-    level = level1;
+    level = currentLevel;
     charakter = new Charakter();
     endboss = this.level.enemies[0];
     throwableObject = [];
@@ -14,11 +14,10 @@ class World {
     coins = 0;
     bottles = 0;
 
-    constructor(canvas, keyboard, currentLevel) {
+    constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.level = currentLevel;
         this.draw();
         this.setWorld();
         this.run();

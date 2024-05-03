@@ -1,5 +1,4 @@
 let startScreen;
-let currentLevel;
 let winScreen;
 let canvas;
 let world;
@@ -97,14 +96,13 @@ function loadStartScreen() {
 }
 
 
-function startGame(currentLevel) {
-    currentLevel = 'level1';
+function startGame() {
     muteSound();
     startScreen.classList.add('d-none');
     canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
     initLevel();
-    world = new World(canvas, keyboard, currentLevel);
+    world = new World(canvas, keyboard);
 
     console.log('My Charakter is', world.charakter);
 }

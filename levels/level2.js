@@ -1,7 +1,7 @@
-let level2;
-function initLevel() {
 
-    level2 = new Level(
+function initLevel2() {
+
+    currentLevel = new Level(
         [
             // new Chicken(700),
             new Chicken(1250),
