@@ -55,14 +55,14 @@ function playAgain() {
     canvas.classList.remove('d-none');
     winScreen.classList.add('d-none');
     world = null;
-    startGame();
+    startGame(initLevel);
 }
 
 function startNextLevel() {
     canvas.classList.remove('d-none');
     winScreen.classList.add('d-none');
     world = null;
-    startGame(level2);
+    startGame(initLevel2);
 }
 
 
@@ -75,7 +75,7 @@ function loadWinScreen() {
         <img id="mute-sound" class="" onclick="playSound()" src="./img/volume-off.svg" alt="">
         <img id="play-sound" class="d-none" onclick="muteSound()" src="./img/volume.svg" alt="">
     </div>
-    <div class="start-btn" onclick="startNextLevel(level2)">Next Level</div>
+    <div class="start-btn" onclick="startNextLevel()">Next Level</div>
     <div class="start-btn" onclick="playAgain()">Play again</div>
     <div class="start-btn" onclick="loadStartScreen()">Back to menu</div>
     `;
@@ -90,21 +90,19 @@ function loadStartScreen() {
         <img id="mute-sound" class="" onclick="playSound()" src="./img/volume-off.svg" alt="">
         <img id="play-sound" class="d-none" onclick="muteSound()" src="./img/volume.svg" alt="">
     </div>
-    <div class="start-btn" onclick="startGame()">Start Game</div>
+    <div class="start-btn" onclick="startGame(initLevel)">Start Game</div>
     <div class="start-btn" onclick="startGame()">Settings</div>
     `;
 }
 
 
-function startGame() {
+function startGame(initLevel) {
     muteSound();
     startScreen.classList.add('d-none');
     canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
     initLevel();
     world = new World(canvas, keyboard);
-
-    console.log('My Charakter is', world.charakter);
 }
 
 
