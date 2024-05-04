@@ -1,7 +1,4 @@
-let startScreen;
-let winScreen;
-let canvas;
-let world;
+let world, canvas, startScreen,  winScreen, gameMenu;
 let keyboard = new Keyboard();
 let startSound = new Audio('audio/start-background-sound.mp3');
 
@@ -9,6 +6,7 @@ let intervalIDs = [];
 let i = 1;
 
 function init() {
+    gameMenu = document.getElementById('game-menu');
     startScreen = document.getElementById('start-screen');
     winScreen = document.getElementById('win-screen');
     loadStartScreen();
@@ -52,6 +50,8 @@ function clearAllIntervals() {
 }
 
 function playAgain() {
+    clearAllIntervals();
+    gameMenu.classList.add('d-none');
     canvas.classList.remove('d-none');
     winScreen.classList.add('d-none');
     world = null;
@@ -68,6 +68,8 @@ function startNextLevel() {
 
 function loadWinScreen() {
     clearAllIntervals();
+    let ingameMenu = document.getElementById('ingame-menu');
+    ingameMenu.classList.add('d-none');
     canvas.classList.add('d-none');
     winScreen.classList.remove('d-none');
     winScreen.innerHTML = /* html */ `
@@ -79,7 +81,8 @@ function loadWinScreen() {
 
 
 function loadStartScreen() {
-    let gameMenu = document.getElementById('game-menu');
+    let ingameMenu = document.getElementById('ingame-menu');
+    ingameMenu.classList.add('d-none');
     gameMenu.classList.add('d-none');
     winScreen.classList.add('d-none');
     startScreen.classList.remove('d-none');
@@ -92,6 +95,8 @@ function loadStartScreen() {
 
 function startGame(initLevel) {
     muteSound();
+    let ingameMenu = document.getElementById('ingame-menu');
+    ingameMenu.classList.remove('d-none');
     startScreen.classList.add('d-none');
     canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
@@ -121,7 +126,6 @@ function muteSound() {
 
 
 function openGameMenu() {
-    let gameMenu = document.getElementById('game-menu');
     gameMenu.classList.remove('d-none');
     gameMenu.innerHTML = /* html */ `
     <div class="menu-btn" onclick="closeopenGameMenu()">Continue</div>
@@ -133,13 +137,13 @@ function openGameMenu() {
 
 
 function closeopenGameMenu() {
-    let gameMenu = document.getElementById('game-menu');
     gameMenu.classList.add('d-none');
 }
 
 
 function backToHomescreen() {
     clearAllIntervals();
+    gameMenu.classList.add('d-none');
     canvas.classList.add('d-none');
     loadStartScreen();
 }
