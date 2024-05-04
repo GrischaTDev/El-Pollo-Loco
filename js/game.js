@@ -71,10 +71,6 @@ function loadWinScreen() {
     canvas.classList.add('d-none');
     winScreen.classList.remove('d-none');
     winScreen.innerHTML = /* html */ `
-    <div class="start-sound">
-        <img id="mute-sound" class="" onclick="playSound()" src="./img/volume-off.svg" alt="">
-        <img id="play-sound" class="d-none" onclick="muteSound()" src="./img/volume.svg" alt="">
-    </div>
     <div class="menu-btn" onclick="startNextLevel()">Next Level</div>
     <div class="menu-btn" onclick="playAgain()">Play again</div>
     <div class="menu-btn" onclick="loadStartScreen()">Back to menu</div>
@@ -83,15 +79,13 @@ function loadWinScreen() {
 
 
 function loadStartScreen() {
+    let gameMenu = document.getElementById('game-menu');
+    gameMenu.classList.add('d-none');
     winScreen.classList.add('d-none');
     startScreen.classList.remove('d-none');
     startScreen.innerHTML = /* html */ `
-    <div class="start-sound">
-        <img id="mute-sound" class="" onclick="playSound()" src="./img/volume-off.svg" alt="">
-        <img id="play-sound" class="d-none" onclick="muteSound()" src="./img/volume.svg" alt="">
-    </div>
     <div class="menu-btn" onclick="startGame(initLevel)">Start Game</div>
-    <div class="menu-btn" onclick="startGame()">Settings</div>
+    <div class="menu-btn" onclick="controlInfo()">Controls</div>
     `;
 }
 
@@ -126,6 +120,67 @@ function muteSound() {
 }
 
 
+function openGameMenu() {
+    let gameMenu = document.getElementById('game-menu');
+    gameMenu.classList.remove('d-none');
+    gameMenu.innerHTML = /* html */ `
+    <div class="menu-btn" onclick="closeopenGameMenu()">Continue</div>
+    <div class="menu-btn" onclick="playAgain()">Level reset</div>
+    <div class="menu-btn" onclick="controlInfo()">Controls</div>
+    <div class="menu-btn" onclick="backToHomescreen()">Back to menu</div>
+    `;
+}
+
+
+function closeopenGameMenu() {
+    let gameMenu = document.getElementById('game-menu');
+    gameMenu.classList.add('d-none');
+}
+
+
+function backToHomescreen() {
+    clearAllIntervals();
+    canvas.classList.add('d-none');
+    loadStartScreen();
+}
+
+
+function controlInfo() {
+    let controlInfo = document.getElementById('control-info');
+    controlInfo.classList.remove('d-none');
+    controlInfo.innerHTML = /* html */ `
+    <img class="close" src="./img/icons/close.svg" onclick="closeControlInfo()" alt="">
+    <div class="control-container">
+        <span>Move character</span>
+        <img src="./img/icons/control.png" alt="">
+    </div>
+    <div class="control-container">
+        <span>Jump</span>
+        <img src="./img/icons/space.png" alt="">
+    </div>
+    <div class="control-container">
+        <span>Throw a bottle</span>
+        <img src="./img/icons/letter-d.png" alt="">
+    </div>
+    `;
+}
+
+
+function closeControlInfo() {
+    let controlInfo = document.getElementById('control-info');
+    controlInfo.classList.add('d-none');
+}
+
+
+let controlInfo2 = document.getElementById('control-info');
+controlInfo2.addEventListener('click', (event) => {
+    if (event.target === controlInfo2) {
+        controlInfo2.classList.add('d-none');
+    }
+});
+
+
+
 function setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);
     intervalIDs.push(id);
@@ -134,4 +189,48 @@ function setStoppableInterval(fn, time) {
 
 function stopGame() {
     intervalIDs.forEach(clearInterval);
+}
+
+
+function fullscreenOn() {
+    let on = document.getElementById('fullscreen-btn-on');
+    let off = document.getElementById('fullscreen-btn-off');
+    on.classList.add('d-none');
+    off.classList.remove('d-none');
+    let fullscreen = document.getElementById('fullscreen');
+    fullscreen.classList.add('fullscreen');
+    openFullscreen(fullscreen);
+}
+
+
+function fullscreenOff() {
+    let on = document.getElementById('fullscreen-btn-on');
+    let off = document.getElementById('fullscreen-btn-off');
+    on.classList.remove('d-none');
+    off.classList.add('d-none');
+    let fullscreen = document.getElementById('fullscreen');
+    fullscreen.classList.remove('fullscreen');
+    closeFullscreen(fullscreen);
+}
+
+
+function openFullscreen(fullscreen) {
+    if (fullscreen.requestFullscreen) {
+        fullscreen.requestFullscreen();
+    } else if (fullscreen.webkitRequestFullscreen) { /* Safari */
+        fullscreen.webkitRequestFullscreen();
+    } else if (fullscreen.msRequestFullscreen) { /* IE11 */
+        fullscreen.msRequestFullscreen();
+    }
+}
+
+
+function closeFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    }
 }

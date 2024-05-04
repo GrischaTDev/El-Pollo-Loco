@@ -26,14 +26,27 @@
     <script src="models/endboss.class.js"></script>
     <script src="levels/level1.js"></script>
     <script src="levels/level2.js"></script>
-    <script src="js/game.js"></script>
+    <script src="js/game.js" defer></script>
 </head>
 <body onload="init()">
     <h1 translate="no">El Pollo Loco</h1>
-    <div id="start-screen" class="menus"></div>
-    <div id="win-screen" class="menus d-none"></div>
-    <div id="gameover-screen" class="menus d-none"></div>
-    <canvas id="canvas" class="d-none" width="720" height="480"></canvas>
+    <div id="fullscreen" class="">
+        <div id="start-screen" class="menus"></div>
+        <div id="win-screen" class="menus d-none"></div>
+        <div id="gameover-screen" class="menus d-none"></div>
+        <canvas id="canvas" class="d-none" width="720" height="480"></canvas>
+
+        <div class="game-options">
+            <img class="" onclick="openGameMenu()" src="./img/icons/settings.svg" alt="">
+            <img id="mute-sound" class="" onclick="playSound()" src="./img/volume-off.svg" alt="">
+            <img id="play-sound" class="d-none" onclick="muteSound()" src="./img/volume.svg" alt="">
+            <img id="fullscreen-btn-on" class="fullscreen-btn" onclick="fullscreenOn()" src="./img/icons/fullscreen.svg" alt="">
+            <img id="fullscreen-btn-off" class="fullscreen-btn d-none" onclick="fullscreenOff()" src="./img/icons/fullscreen.svg" alt="">
+        </div>
+        <div id="game-menu" class="game-menu d-none"></div> 
+        <div id="control-info" class="control-info d-none"></div> 
+    </div>
+
 
 </body>
 </html>
