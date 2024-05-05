@@ -1,6 +1,9 @@
-let world, canvas, startScreen,  winScreen, gameMenu;
+let world, canvas, startScreen, winScreen, gameMenu;
+let backgroundMusic = false;
 let keyboard = new Keyboard();
 let startSound = new Audio('audio/start-background-sound.mp3');
+let startWinSound = new Audio('audio/win.mp3');
+let startGameOverSound = new Audio('audio/game-over.wav');
 
 let intervalIDs = [];
 let i = 1;
@@ -68,19 +71,46 @@ function startNextLevel() {
 
 function loadWinScreen() {
     clearAllIntervals();
+    stopSound();
+    playWinSound();
     let ingameMenu = document.getElementById('ingame-menu');
     ingameMenu.classList.add('d-none');
     canvas.classList.add('d-none');
     winScreen.classList.remove('d-none');
     winScreen.innerHTML = /* html */ `
-    <div class="menu-btn" onclick="startNextLevel()">Next Level</div>
-    <div class="menu-btn" onclick="playAgain()">Play again</div>
-    <div class="menu-btn" onclick="loadStartScreen()">Back to menu</div>
+    <img src="./img/icons/trophy.png" alt="">
+    <div>YOU WIN</div>
+    <div class="win-menu-btn">
+        <div class="menu-btn" onclick="loadStartScreen()">Back to menu</div>
+        <div class="menu-btn" onclick="playAgain()">Play again</div>
+        <div class="menu-btn" onclick="startNextLevel()">Next Level</div>
+    </div>
+    `;
+}
+
+function loadGameOverScreen() {
+    clearAllIntervals();
+    stopSound();
+    playGameOverSound();
+    let ingameMenu = document.getElementById('ingame-menu');
+    ingameMenu.classList.add('d-none');
+    canvas.classList.add('d-none');
+    winScreen.classList.remove('d-none');
+    winScreen.innerHTML = /* html */ `
+    <img src="./img/icons/game-over.png" alt="">
+    <div>Game Over</div>
+    <div class="win-menu-btn">
+        <div class="menu-btn" onclick="loadStartScreen()">Back to menu</div>
+        <div class="menu-btn" onclick="playAgain()">Play again</div>
+    </div>
     `;
 }
 
 
 function loadStartScreen() {
+    if (backgroundMusic) {
+        playSound();
+    }
     let ingameMenu = document.getElementById('ingame-menu');
     ingameMenu.classList.add('d-none');
     gameMenu.classList.add('d-none');
@@ -94,7 +124,9 @@ function loadStartScreen() {
 
 
 function startGame(initLevel) {
-    muteSound();
+    if (backgroundMusic) {
+        playSound();
+    }
     let ingameMenu = document.getElementById('ingame-menu');
     ingameMenu.classList.remove('d-none');
     startScreen.classList.add('d-none');
@@ -105,6 +137,18 @@ function startGame(initLevel) {
 }
 
 
+function playWinSound() {
+    startWinSound.play();
+    startWinSound.volume = 0.2;
+    startWinSound.loop = false;
+}
+
+function playGameOverSound() {
+    startGameOverSound.play();
+    startGameOverSound.volume = 0.2;
+    startGameOverSound.loop = false;
+}
+
 function playSound() {
     let playButton = document.getElementById('play-sound');
     let muteButton = document.getElementById('mute-sound');
@@ -113,6 +157,7 @@ function playSound() {
     startSound.play();
     startSound.volume = 0.2;
     startSound.loop = true;
+    backgroundMusic = true;
 }
 
 
@@ -121,6 +166,11 @@ function muteSound() {
     let muteButton = document.getElementById('mute-sound');
     muteButton.classList.remove('d-none');
     playButton.classList.add('d-none');
+    startSound.pause();
+    backgroundMusic = false;
+}
+
+function stopSound() {
     startSound.pause();
 }
 

@@ -53,16 +53,6 @@ class World {
     }
 
 
-    gameOver() {
-        console.log('Du hast verloren!');
-    }
-
-    win() {
-        loadWinScreen();
-        console.log('Du hast gewonnen!');
-    }
-
-
     checkCollisions() {
         this.checkCollisionEnemys();
         this.checkCollisionCoins();
@@ -117,13 +107,13 @@ class World {
 
     charakterHit() {
         if (this.charakter.currentHit) return;
-        this.charakter.hit(5);
+        this.charakter.hit(10);
         this.charakter.hurt_sound.play();
         this.charakter.hurt_sound.volume = 0.5;
         this.charakter.currentHit = true;
         this.statusBar.setPercentage(this.charakter.energy);
         if (this.charakter.energy == 0) {
-            this.gameOver();
+            loadGameOverScreen()
         }
 
         setTimeout(() => {
@@ -141,9 +131,8 @@ class World {
                 coins.collectSound.play()
                 coins.collectSound.volume = 0.5;
             }
-            // if (this.coins == 10 &&  this.endboss.energy == 0) {
-            if (this.coins == 1) {
-                this.win();
+            if (this.coins == 10 &&  this.endboss.energy == 0) {
+                loadWinScreen();
             }
         });
     }
