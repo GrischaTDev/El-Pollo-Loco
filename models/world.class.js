@@ -80,8 +80,7 @@ class World {
             this.endboss.currentHit = false;
         }, 1000)
 
-        if (this.endboss.energy <= 0 && this.endboss.endbossIsDead == false) {
-            this.endboss.loadImage('img/4_enemie_boss_chicken/5_dead/G24.png');
+        if (this.endboss.energy <= 0) {
             this.endboss.speed = 0;
             this.endboss.stopAnimation();
             this.endboss.endbossIsDead = true;
@@ -93,7 +92,6 @@ class World {
 
 
     checkCollisionEnemys() {
-
         this.level.enemies.forEach((enemy) => {
             if (this.charakter.isColliding(enemy) && this.charakter.speedY == 0 && !enemy.chickenIsDead) {
                 this.charakterHit();
