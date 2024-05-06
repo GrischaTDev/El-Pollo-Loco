@@ -3,15 +3,18 @@ function initLevel() {
 
     currentLevel = new Level(
         [
+            new Endboss(),
             new Chicken(700),
             new Chicken(1250),
             new Chicken(1700),
             new Chicken(2120),
-            new Chicken(2700),
-            new Endboss()
+            new Chicken(2700)
         ],
         [
-            new Cloud()
+            new Cloud('img/5_background/layers/4_clouds/2.png', 200),
+            new Cloud('img/5_background/layers/4_clouds/1.png', 900),
+            new Cloud('img/5_background/layers/4_clouds/2.png', 1800),
+            new Cloud('img/5_background/layers/4_clouds/2.png', 3000)
         ],
         [
             new BackgroundObject('img/5_background/layers/air.png', -719),

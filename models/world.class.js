@@ -45,8 +45,6 @@ class World {
             this.bottles--;
             this.statusBarBottle.setPercentage(this.bottles);
 
-            console.log('Tabasko', this.bottles);
-            console.log('Tabasko Array', this.throwableObject.length);
         } else {
             return;
         }
@@ -62,8 +60,6 @@ class World {
 
 
     checkCollisionEndboss() {
-        this.endboss = this.level.enemies.find(enemy => enemy.name === "Endboss");
-
         this.throwableObject.forEach((flasche) => {
             if (this.endboss.isColliding(flasche)) {
                 this.bossHit();
@@ -74,7 +70,7 @@ class World {
 
     bossHit() {
         if (this.endboss.currentHit) return;
-        this.endboss.hit(20);
+        this.endboss.hit(50);
         this.endboss.isEndbossHurt = true;
         this.endboss.currentHit = true;
         this.endboss.energy;
@@ -83,10 +79,21 @@ class World {
         setTimeout(() => {
             this.endboss.currentHit = false;
         }, 1000)
+
+        if (this.endboss.energy <= 0 && this.endboss.endbossIsDead == false) {
+            this.endboss.loadImage('img/4_enemie_boss_chicken/5_dead/G24.png');
+            this.endboss.speed = 0;
+            this.endboss.stopAnimation();
+            this.endboss.endbossIsDead = true;
+            setTimeout(() => {
+                this.endboss.x = -3000;
+            }, 2000);
+        }
     }
 
 
     checkCollisionEnemys() {
+
         this.level.enemies.forEach((enemy) => {
             if (this.charakter.isColliding(enemy) && this.charakter.speedY == 0 && !enemy.chickenIsDead) {
                 this.charakterHit();
@@ -168,21 +175,23 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.ctx.translate(-this.camera_x, 0); // Back
 
+
+        this.ctx.translate(this.camera_x, 0); // Forwards
+        this.addToMap(this.charakter);
+        this.addObjectsToMap(this.throwableObject);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
+
+        this.ctx.translate(-this.camera_x, 0); // Back
+
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
         if (this.endboss.isEndbossHurt) {
             this.addToMap(this.statusBarEndboss);
         } 
-        this.ctx.translate(this.camera_x, 0); // Forwards
-        this.addToMap(this.charakter);
-        this.addObjectsToMap(this.throwableObject);
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.clouds);
-        this.addObjectsToMap(this.level.coins);
-        this.addObjectsToMap(this.level.bottles);
-
-        this.ctx.translate(-this.camera_x, 0); // Back
 
         let self = this;
         requestAnimationFrame(function () {
