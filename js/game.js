@@ -292,3 +292,22 @@ function closeFullscreen() {
         document.msExitFullscreen();
     }
 }
+
+
+window.addEventListener('DOMContentLoaded', function() {
+    const landscapeWarning = document.getElementById('landscapeWarning');
+
+    function handleOrientationChange() {
+        if (window.innerWidth < window.innerHeight) {
+            landscapeWarning.classList.remove('d-none');
+        } else {
+            landscapeWarning.classList.add('d-none');
+        }
+    }
+
+    // Initial überprüfen
+    handleOrientationChange();
+
+    // Event-Listener für Änderungen der Bildschirmorientierung hinzufügen
+    window.addEventListener('resize', handleOrientationChange);
+});
