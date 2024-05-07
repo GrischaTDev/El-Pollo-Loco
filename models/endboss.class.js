@@ -47,21 +47,26 @@ class Endboss extends MovableObject {
             }
         }, 400);
 
-        this.animationInterval = setInterval(() => {
+        this.hurtAnimationInterval = setInterval(() => {
             if (this.isEndbossHurt) {
                 let i = this.currentImage % this.IMAGES_HURT.length;
                 this.playAnimation(this.IMAGES_HURT);
             }
         }, 200);
 
-        setInterval(() => {
+        this.deadAnimationInterval = setInterval(() => {
             if (this.endbossIsDead) {
                 let i = this.currentImage % this.IMAGES_DEAD.length;
                 this.playAnimation(this.IMAGES_DEAD);
+    
+                // Überprüfen, ob das letzte Bild im Array erreicht wurde
+                if (i === this.IMAGES_DEAD.length - 1) {
+                    clearInterval(this.deadAnimationInterval); // Intervall stoppen
+                }
             }
-        }, 666);
+        }, 300);
 
-        this.animationInterval = setInterval(() => {
+        this.moveAnimationInterval = setInterval(() => {
             if (this.isEndbossHurt) {
                 this.x -= 50;
             }
@@ -70,6 +75,8 @@ class Endboss extends MovableObject {
 
     stopAnimation() {
         // this.chickenDeadSound.play();
-        clearInterval(this.animationInterval); // Stoppe das Intervall
+        clearInterval(this.animationInterval); 
+        clearInterval(this.hurtAnimationInterval); 
+        clearInterval(this.moveAnimationInterval); 
     }
 }

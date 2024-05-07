@@ -119,6 +119,10 @@ function loadStartScreen() {
     startScreen.innerHTML = /* html */ `
     <div class="menu-btn" onclick="startGame(initLevel)">Start Game</div>
     <div class="menu-btn" onclick="controlInfo()">Controls</div>
+    <div class="legal">
+        <a href="legal-notice.html" target="_blank">Legal notice</a>
+        <a href="privacy-policy.html" target="_blank">Privacy policy</a>
+    </div>
     `;
 }
 
