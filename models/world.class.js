@@ -70,6 +70,7 @@ class World {
 
     bossHit() {
         if (this.endboss.currentHit) return;
+        this.endboss.chickenDeadSound.play();
         this.endboss.hit(50);
         this.endboss.isEndbossHurt = true;
         this.endboss.currentHit = true;

@@ -24,6 +24,7 @@ class Endboss extends MovableObject {
     ];
 
     animationInterval = null;
+    chickenDeadSound = new Audio('audio/chicken-dead.mp3');
 
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
@@ -74,7 +75,6 @@ class Endboss extends MovableObject {
     }
 
     stopAnimation() {
-        // this.chickenDeadSound.play();
         clearInterval(this.animationInterval); 
         clearInterval(this.hurtAnimationInterval); 
         clearInterval(this.moveAnimationInterval); 
