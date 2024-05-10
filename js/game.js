@@ -127,7 +127,7 @@ function loadStartScreen() {
 }
 
 
-function startGame(initLevel) {
+function startGame() {
     if (backgroundMusic) {
         playSound();
     }
@@ -136,7 +136,7 @@ function startGame(initLevel) {
     startScreen.classList.add('d-none');
     canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
-    initLevel();
+    initLevel2();
     world = new World(canvas, keyboard);
 }
 

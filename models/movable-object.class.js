@@ -24,7 +24,11 @@ class MovableObject extends DrawableObject {
         if (this instanceof ThrowableObject) {
             return true;
         } else {
-            return this.y < 340;
+            if (this instanceof Charakter) {
+                return this.y < 180;
+            } else {
+                return this.y < 340;
+            }
         }
     }
 

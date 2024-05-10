@@ -1,5 +1,5 @@
 class SmallChicken extends MovableObject {
-    name = 'Chicken';
+    name = 'Small Chicken';
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
         'img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
@@ -17,7 +17,7 @@ class SmallChicken extends MovableObject {
         this.speed = 0.5 + Math.random() * 1;
         this.loadImages(this.IMAGES_WALKING);
         this.animate();
-        this.applyGravity();
+        this.applyGravity(this.y);
         this.chickenIsDead = false;
     }
 
@@ -35,7 +35,7 @@ class SmallChicken extends MovableObject {
 
         this.animationInterval = setInterval(() => {
             this.jump();
-        }, 4000);
+        }, 2000);
     }
 
     stopAnimation() {

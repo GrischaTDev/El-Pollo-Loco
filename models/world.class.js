@@ -99,7 +99,11 @@ class World {
             }
             
             if (this.charakter.isColliding(enemy) && this.charakter.speedY < 0) {
-                enemy.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
+                if (enemy.name == 'Chicken') {
+                    enemy.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
+                } else {
+                    enemy.loadImage('img/3_enemies_chicken/chicken_small/2_dead/dead.png');
+                }
                 enemy.speed = 0;
                 enemy.stopAnimation();
                 enemy.chickenIsDead = true;
