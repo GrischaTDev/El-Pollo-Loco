@@ -32,18 +32,13 @@
         height: 100vh;
     }
 
-    /* .control-info {
+    .control-mobile {
         position: absolute;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 20px;
-        top: 0;
+        justify-content: space-between;
+        margin: 0 20px;
+        bottom: 20px;
         right: 0;
         left: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.855);
-        z-index: 10;
-    } */
+    }
 }

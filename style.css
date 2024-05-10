@@ -93,6 +93,12 @@ h1 {
     z-index: 10;
 }
 
+.control-help {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100vw;
+}
+
 .control-container {
     display: flex;
     align-items: center;
@@ -272,6 +278,7 @@ canvas {
     font-size: 24px;
     margin-bottom: 0;
 }
+
 .privacy-policy h4 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
@@ -300,4 +307,17 @@ canvas {
     z-index: 300;
     justify-content: center;
     align-items: center;
+}
+
+.control-mobile {
+    display: none;
+}
+
+.control-mobile div{
+    display: flex;
+    gap: 20px;
+}
+
+.control-mobile img {
+    height: 60px;
 }

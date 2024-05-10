@@ -45,8 +45,37 @@
             <img id="fullscreen-btn-on" class="fullscreen-btn" onclick="fullscreenOn()" src="./img/icons/fullscreen.svg" alt="">
             <img id="fullscreen-btn-off" class="fullscreen-btn d-none" onclick="fullscreenOff()" src="./img/icons/fullscreen.svg" alt="">
         </div>
+
         <div id="game-menu" class="game-menu d-none"></div> 
-        <div id="control-info" class="control-info d-none"></div> 
+
+        <div id="control-info" class="control-info d-none">
+            <img class="close" src="./img/icons/close.svg" onclick="closeControlInfo()" alt="">
+            <div class="control-help">
+                <div class="control-container">
+                    <span>Move character</span>
+                    <img src="./img/icons/control.png" alt="">
+                </div>
+                <div class="control-container">
+                    <span>Jump</span>
+                    <img src="./img/icons/space.png" alt="">
+                </div>
+                <div class="control-container">
+                    <span>Throw a bottle</span>
+                    <img src="./img/icons/letter-d.png" alt="">
+                </div>
+            </div>
+        </div> 
+
+        <div id="control-mobile" class="control-mobile d-none">
+            <div>
+                <img src="./img/icons/left.png" alt="">
+                <img src="./img/icons/right.png" alt="">
+            </div>
+            <div>
+                <img src="./img/icons/jump.png" alt="">
+                <img src="./img/icons/throw.png" alt="">
+            </div>
+        </div> 
     </div>
     <div id="landscapeWarning" class="d-none">Please turn your device to landscape mode!</div>
 </body>

@@ -1,4 +1,4 @@
-let world, canvas, startScreen, winScreen, gameMenu;
+let world, canvas, startScreen, winScreen, gameMenu, mobileControls;
 let backgroundMusic = false;
 let keyboard = new Keyboard();
 let startSound = new Audio('audio/start-background-sound.mp3');
@@ -12,6 +12,7 @@ function init() {
     gameMenu = document.getElementById('game-menu');
     startScreen = document.getElementById('start-screen');
     winScreen = document.getElementById('win-screen');
+    mobileControls = document.getElementById('control-mobile');
     loadStartScreen();
 }
 
@@ -55,6 +56,7 @@ function clearAllIntervals() {
 function playAgain() {
     clearAllIntervals();
     gameMenu.classList.add('d-none');
+    mobileControls.classList.add('d-none');
     canvas.classList.remove('d-none');
     winScreen.classList.add('d-none');
     world = null;
@@ -64,6 +66,7 @@ function playAgain() {
 function startNextLevel() {
     canvas.classList.remove('d-none');
     winScreen.classList.add('d-none');
+    mobileControls.classList.remove('d-none');
     world = null;
     startGame(initLevel2);
 }
@@ -75,6 +78,7 @@ function loadWinScreen() {
     playWinSound();
     let ingameMenu = document.getElementById('ingame-menu');
     ingameMenu.classList.add('d-none');
+    mobileControls.classList.add('d-none');
     canvas.classList.add('d-none');
     winScreen.classList.remove('d-none');
     winScreen.innerHTML = /* html */ `
@@ -94,6 +98,7 @@ function loadGameOverScreen() {
     playGameOverSound();
     let ingameMenu = document.getElementById('ingame-menu');
     ingameMenu.classList.add('d-none');
+    mobileControls.classList.add('d-none');
     canvas.classList.add('d-none');
     winScreen.classList.remove('d-none');
     winScreen.innerHTML = /* html */ `
@@ -114,6 +119,7 @@ function loadStartScreen() {
     let ingameMenu = document.getElementById('ingame-menu');
     ingameMenu.classList.add('d-none');
     gameMenu.classList.add('d-none');
+    mobileControls.classList.add('d-none');
     winScreen.classList.add('d-none');
     startScreen.classList.remove('d-none');
     startScreen.innerHTML = /* html */ `
@@ -134,6 +140,7 @@ function startGame() {
     let ingameMenu = document.getElementById('ingame-menu');
     ingameMenu.classList.remove('d-none');
     startScreen.classList.add('d-none');
+    mobileControls.classList.remove('d-none');
     canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
     initLevel2();
@@ -181,6 +188,7 @@ function stopSound() {
 
 function openGameMenu() {
     gameMenu.classList.remove('d-none');
+    mobileControls.classList.add('d-none');
     gameMenu.innerHTML = /* html */ `
     <div class="menu-btn" onclick="closeopenGameMenu()">Continue</div>
     <div class="menu-btn" onclick="playAgain()">Level reset</div>
@@ -192,6 +200,7 @@ function openGameMenu() {
 
 function closeopenGameMenu() {
     gameMenu.classList.add('d-none');
+    mobileControls.classList.remove('d-none');
 }
 
 
@@ -206,21 +215,6 @@ function backToHomescreen() {
 function controlInfo() {
     let controlInfo = document.getElementById('control-info');
     controlInfo.classList.remove('d-none');
-    controlInfo.innerHTML = /* html */ `
-    <img class="close" src="./img/icons/close.svg" onclick="closeControlInfo()" alt="">
-    <div class="control-container">
-        <span>Move character</span>
-        <img src="./img/icons/control.png" alt="">
-    </div>
-    <div class="control-container">
-        <span>Jump</span>
-        <img src="./img/icons/space.png" alt="">
-    </div>
-    <div class="control-container">
-        <span>Throw a bottle</span>
-        <img src="./img/icons/letter-d.png" alt="">
-    </div>
-    `;
 }
 
 

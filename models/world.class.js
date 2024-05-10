@@ -94,11 +94,13 @@ class World {
 
     checkCollisionEnemys() {
         this.level.enemies.forEach((enemy) => {
-            if (this.charakter.isColliding(enemy) && this.charakter.speedY == 0 && !enemy.chickenIsDead) {
-                this.charakterHit();
+            if (this.charakter.isColliding(enemy)) {
+                if ((this.charakter.speedY == 0 && !enemy.chickenIsDead) || (this.charakter.speedY > 0 && enemy.name == 'Small Chicken')) {
+                    this.charakterHit();
+                }
             }
             
-            if (this.charakter.isColliding(enemy) && this.charakter.speedY < 0) {
+            if (this.charakter.isColliding(enemy) && this.charakter.speedY < 0 && enemy.speedY == 0) {
                 if (enemy.name == 'Chicken') {
                     enemy.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
                 } else {

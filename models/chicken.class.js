@@ -33,6 +33,7 @@ class Chicken extends MovableObject {
         }, 100);
     }
 
+    
     stopAnimation() {
         this.chickenDeadSound.play();
         clearInterval(this.animationInterval); // Stoppe das Intervall
