@@ -103,7 +103,7 @@ function loadStartScreen() {
 }
 
 
-function startGame() {
+function startGame(initLevel) {
     if (backgroundMusic) {
         playSound();
     }
@@ -113,7 +113,7 @@ function startGame() {
     mobileControls.classList.remove('d-none');
     canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
-    initLevel2();
+    initLevel();
     world = new World(canvas, keyboard);
 }
 

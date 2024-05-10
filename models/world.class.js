@@ -71,7 +71,7 @@ class World {
     bossHit() {
         if (this.endboss.currentHit) return;
         this.endboss.chickenDeadSound.play();
-        this.endboss.hit(50);
+        this.endboss.hit(20);
         this.endboss.isEndbossHurt = true;
         this.endboss.currentHit = true;
         this.endboss.energy;
@@ -95,7 +95,7 @@ class World {
     checkCollisionEnemys() {
         this.level.enemies.forEach((enemy) => {
             if (this.charakter.isColliding(enemy)) {
-                if ((this.charakter.speedY == 0 && !enemy.chickenIsDead) || (this.charakter.speedY > 0 && enemy.name == 'Small Chicken')) {
+                if ((this.charakter.speedY == 0 && !enemy.chickenIsDead && !enemy.endbossIsDead) || (this.charakter.speedY > 0 && enemy.name == 'Small Chicken')) {
                     this.charakterHit();
                 }
             }
