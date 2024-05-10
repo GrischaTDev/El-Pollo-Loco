@@ -51,15 +51,6 @@ function loadWinScreen() {
     mobileControls.classList.add('d-none');
     canvas.classList.add('d-none');
     winScreen.classList.remove('d-none');
-    winScreen.innerHTML = /* html */ `
-    <img src="./img/icons/trophy.png" alt="">
-    <div>YOU WIN</div>
-    <div class="win-menu-btn">
-        <div class="menu-btn" onclick="loadStartScreen()">Back to menu</div>
-        <div class="menu-btn" onclick="playAgain()">Play again</div>
-        <div class="menu-btn" onclick="startNextLevel()">Next Level</div>
-    </div>
-    `;
 }
 
 function loadGameOverScreen() {
@@ -71,14 +62,6 @@ function loadGameOverScreen() {
     mobileControls.classList.add('d-none');
     canvas.classList.add('d-none');
     winScreen.classList.remove('d-none');
-    winScreen.innerHTML = /* html */ `
-    <img src="./img/icons/game-over.png" alt="">
-    <div>Game Over</div>
-    <div class="win-menu-btn">
-        <div class="menu-btn" onclick="loadStartScreen()">Back to menu</div>
-        <div class="menu-btn" onclick="playAgain()">Play again</div>
-    </div>
-    `;
 }
 
 
@@ -92,14 +75,6 @@ function loadStartScreen() {
     mobileControls.classList.add('d-none');
     winScreen.classList.add('d-none');
     startScreen.classList.remove('d-none');
-    startScreen.innerHTML = /* html */ `
-    <div class="menu-btn" onclick="startGame(initLevel)">Start Game</div>
-    <div class="menu-btn" onclick="controlInfo()">Controls</div>
-    <div class="legal">
-        <a href="legal-notice.html" target="_blank">Legal notice</a>
-        <a href="privacy-policy.html" target="_blank">Privacy policy</a>
-    </div>
-    `;
 }
 
 
@@ -123,6 +98,7 @@ function playWinSound() {
     startWinSound.volume = 0.2;
     startWinSound.loop = false;
 }
+
 
 function playGameOverSound() {
     startGameOverSound.play();
@@ -151,6 +127,7 @@ function muteSound() {
     backgroundMusic = false;
 }
 
+
 function stopSound() {
     startSound.pause();
 }
@@ -159,12 +136,6 @@ function stopSound() {
 function openGameMenu() {
     gameMenu.classList.remove('d-none');
     mobileControls.classList.add('d-none');
-    gameMenu.innerHTML = /* html */ `
-    <div class="menu-btn" onclick="closeopenGameMenu()">Continue</div>
-    <div class="menu-btn" onclick="playAgain()">Level reset</div>
-    <div class="menu-btn" onclick="controlInfo()">Controls</div>
-    <div class="menu-btn" onclick="backToHomescreen()">Back to menu</div>
-    `;
 }
 
 
@@ -200,7 +171,6 @@ controlInfo2.addEventListener('click', (event) => {
         controlInfo2.classList.add('d-none');
     }
 });
-
 
 
 function setStoppableInterval(fn, time) {

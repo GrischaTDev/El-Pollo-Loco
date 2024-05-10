@@ -33,9 +33,31 @@
 <body onload="init()">
     <h1 class="start-title" translate="no">El Pollo Loco</h1>
     <div id="fullscreen" class="">
-        <div id="start-screen" class="menus"></div>
-        <div id="win-screen" class="menus win-menu d-none"></div>
-        <div id="gameover-screen" class="menus d-none"></div>
+        <div id="start-screen" class="menus">
+            <div class="menu-btn" onclick="startGame(initLevel)">Start Game</div>
+            <div class="menu-btn" onclick="controlInfo()">Controls</div>
+            <div class="legal">
+                <a href="legal-notice.html" target="_blank">Legal notice</a>
+                <a href="privacy-policy.html" target="_blank">Privacy policy</a>
+            </div>
+        </div>
+        <div id="win-screen" class="menus win-menu d-none">
+            <img src="./img/icons/trophy.png" alt="">
+            <div>YOU WIN</div>
+            <div class="win-menu-btn">
+                <div class="menu-btn" onclick="loadStartScreen()">Back to menu</div>
+                <div class="menu-btn" onclick="playAgain()">Play again</div>
+                <div class="menu-btn" onclick="startNextLevel()">Next Level</div>
+            </div>
+        </div>
+        <div id="gameover-screen" class="menus d-none">
+            <img src="./img/icons/game-over.png" alt="">
+            <div>Game Over</div>
+            <div class="win-menu-btn">
+                <div class="menu-btn" onclick="loadStartScreen()">Back to menu</div>
+                <div class="menu-btn" onclick="playAgain()">Play again</div>
+            </div>
+        </div>
         <canvas id="canvas" class="d-none" width="720" height="480"></canvas>
 
         <div class="game-options">
@@ -46,7 +68,12 @@
             <img id="fullscreen-btn-off" class="fullscreen-btn d-none" onclick="fullscreenOff()" src="./img/icons/fullscreen.svg" alt="">
         </div>
 
-        <div id="game-menu" class="game-menu d-none"></div> 
+        <div id="game-menu" class="game-menu d-none">
+            <div class="menu-btn" onclick="closeopenGameMenu()">Continue</div>
+            <div class="menu-btn" onclick="playAgain()">Level reset</div>
+            <div class="menu-btn" onclick="controlInfo()">Controls</div>
+            <div class="menu-btn" onclick="backToHomescreen()">Back to menu</div>
+        </div> 
 
         <div id="control-info" class="control-info d-none">
             <img class="close" src="./img/icons/close.svg" onclick="closeControlInfo()" alt="">

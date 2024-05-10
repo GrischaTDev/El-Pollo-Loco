@@ -211,6 +211,7 @@ class World {
         })
     }
 
+
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
@@ -223,6 +224,7 @@ class World {
         }
     }
 
+
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -230,6 +232,7 @@ class World {
         mo.x = mo.x * -1;
     }
 
+    
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
