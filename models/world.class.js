@@ -39,15 +39,23 @@ class World {
 
 
     checkThrowObjects() {
-        if (this.keyboard.d && !this.bottles == 0) {
-            let bottle = new ThrowableObject(this.charakter.x + 100, this.charakter.y + 100);
-            this.throwableObject.push(bottle);
-            this.bottles--;
-            this.statusBarBottle.setPercentage(this.bottles);
-
-        } else {
+        if (this.canThrowBottle()) {
+            this.throwBottle();
+        } else 
             return;
-        }
+    }
+
+
+    canThrowBottle() {
+        return this.keyboard.d && !this.bottles == 0;
+    }
+
+
+    throwBottle() {
+        let bottle = new ThrowableObject(this.charakter.x + 100, this.charakter.y + 100);
+        this.throwableObject.push(bottle);
+        this.bottles--;
+        this.statusBarBottle.setPercentage(this.bottles);
     }
 
 
@@ -61,9 +69,8 @@ class World {
 
     checkCollisionEndboss() {
         this.throwableObject.forEach((flasche) => {
-            if (this.endboss.isColliding(flasche)) {
+            if (this.endboss.isColliding(flasche))
                 this.bossHit();
-            }
         });
     }
 
@@ -76,11 +83,12 @@ class World {
         this.endboss.currentHit = true;
         this.endboss.energy;
         this.statusBarEndboss.setPercentage(this.endboss.energy);
+        setTimeout(() => this.endboss.currentHit = false, 1000);
+        this.isEndbossDead();
+    }
 
-        setTimeout(() => {
-            this.endboss.currentHit = false;
-        }, 1000)
 
+    isEndbossDead() {
         if (this.endboss.energy <= 0) {
             this.endboss.speed = 0;
             this.endboss.stopAnimation();
@@ -232,7 +240,7 @@ class World {
         mo.x = mo.x * -1;
     }
 
-    
+
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();

@@ -40,40 +40,44 @@ class Endboss extends MovableObject {
         this.endbossIsDead = false;
     }
 
+
     animate() {
-        this.animationInterval = setInterval(() => {
-            if (!this.isEndbossHurt) {
-                let i = this.currentImage % this.IMAGES_ALERT.length;
-                this.playAnimation(this.IMAGES_ALERT);
-            }
-        }, 400);
-
-        this.hurtAnimationInterval = setInterval(() => {
-            if (this.isEndbossHurt) {
-                let i = this.currentImage % this.IMAGES_HURT.length;
-                this.playAnimation(this.IMAGES_HURT);
-            }
-        }, 200);
-
-        this.deadAnimationInterval = setInterval(() => {
-            if (this.endbossIsDead) {
-                let i = this.currentImage % this.IMAGES_DEAD.length;
-                this.playAnimation(this.IMAGES_DEAD);
-    
-                // Überprüfen, ob das letzte Bild im Array erreicht wurde
-                if (i === this.IMAGES_DEAD.length - 1) {
-                    clearInterval(this.deadAnimationInterval); // Intervall stoppen
-                }
-            }
-        }, 300);
-
-        this.moveAnimationInterval = setInterval(() => {
-            if (this.isEndbossHurt) {
-                this.x -= 50;
-            }
-        }, 1000);
+        this.animationInterval = setInterval(() => this.isHurt(), 400);
+        this.moveAnimationInterval = setInterval(() => this.moveLeftIsHurt(), 1000);
+        this.deadAnimationInterval = setInterval(() => this.isDead(), 300);
     }
 
+
+    isHurt() {
+        if (!this.isEndbossHurt) {
+            let i = this.currentImage % this.IMAGES_ALERT.length;
+            this.playAnimation(this.IMAGES_ALERT);
+        } else {
+            let i = this.currentImage % this.IMAGES_HURT.length;
+            this.playAnimation(this.IMAGES_HURT);
+        }
+    }
+
+
+    moveLeftIsHurt() {
+        if (this.isEndbossHurt) {
+            this.x -= 50;
+        }
+    }
+
+
+    isDead() {
+        if (this.endbossIsDead) {
+            let i = this.currentImage % this.IMAGES_DEAD.length;
+            this.playAnimation(this.IMAGES_DEAD);
+
+            if (i === this.IMAGES_DEAD.length - 1) {
+                clearInterval(this.deadAnimationInterval);
+            }
+        }
+    }
+
+    
     stopAnimation() {
         clearInterval(this.animationInterval); 
         clearInterval(this.hurtAnimationInterval); 
