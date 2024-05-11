@@ -142,7 +142,6 @@ h1 {
     border-radius: 12px;
     border: 2px solid black;
     border-bottom: 5px solid black;
-    /* background-image: url(./img/start_screen/btn-background.png); */
     background-color: #feb03b;
     background-size: cover;
     cursor: pointer;
@@ -247,18 +246,23 @@ canvas {
 
 .privacy-policy-bg {
     width: 100%;
+    display: flex;
+    justify-content: center;
     border-radius: 10px;
     color: white;
-    background-image: unset;
-    background-color: rgb(88, 88, 88);
+    background-color: #f08240;
+    background-image: url(./img/start_screen/desert.png);
+    background-repeat: no-repeat;
 }
 
 .privacy-policy {
-    width: 100%;
+    width: 60%;
     border-radius: 10px;
     color: white;
     padding: 50px;
+    margin-top: 50px;
     box-sizing: border-box;
+    background-color: rgb(88, 88, 88);
 }
 
 .privacy-policy h1 {

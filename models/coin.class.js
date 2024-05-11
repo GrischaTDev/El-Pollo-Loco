@@ -17,10 +17,11 @@ class Coin extends MovableObject {
     }
 
     animate() {
-        // IDLE animation
-        setInterval(() => {
-            let i = this.currentImage % this.IMAGES_COIN.length;
-            this.playAnimation(this.IMAGES_COIN);
-        }, 650);
+        setInterval(() => this.coinIdle(), 650);
+    }
+
+    coinIdle() {
+        let i = this.currentImage % this.IMAGES_COIN.length;
+        this.playAnimation(this.IMAGES_COIN);
     }
 }

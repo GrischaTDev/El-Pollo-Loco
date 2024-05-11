@@ -18,6 +18,7 @@ class ThrowableObject extends MovableObject {
         this.animate();
     }
 
+    
     trow(x, y) {
         this.speedY = 30;
         this.applyGravity();
@@ -26,11 +27,14 @@ class ThrowableObject extends MovableObject {
         }, 25);
     }
 
+
     animate() {
-        setInterval(() => {
-            let i = this.currentImage % this.IMAGES_BOTTLE_ROTATION.length;
-            this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
-        }, 100);
+        setInterval(() => this.throwBottle(), 100);
     }
 
+
+    throwBottle() {
+        let i = this.currentImage % this.IMAGES_BOTTLE_ROTATION.length;
+        this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
+    }
 }

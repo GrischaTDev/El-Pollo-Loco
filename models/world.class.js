@@ -103,27 +103,40 @@ class World {
     checkCollisionEnemys() {
         this.level.enemies.forEach((enemy) => {
             if (this.charakter.isColliding(enemy)) {
-                if ((this.charakter.speedY == 0 && !enemy.chickenIsDead && !enemy.endbossIsDead) || (this.charakter.speedY > 0 && enemy.name == 'Small Chicken')) {
+                if (this.checkCollisionForHit(enemy)) {
                     this.charakterHit();
                 }
             }
-            
-            if (this.charakter.isColliding(enemy) && this.charakter.speedY < 0 && enemy.speedY == 0) {
+
+            if (this.checkCollisionFromTop(enemy)) {
                 if (enemy.name == 'Chicken') {
                     enemy.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
                 } else {
                     enemy.loadImage('img/3_enemies_chicken/chicken_small/2_dead/dead.png');
                 }
-                enemy.speed = 0;
-                enemy.stopAnimation();
-                enemy.chickenIsDead = true;
-                setTimeout(() => {
-                    enemy.x = -3000;
-                }, 2000);
+                this.chickenIsDead(enemy);
+                setTimeout(() => enemy.x = -3000, 2000);
             }
         });
     }
 
+
+    checkCollisionForHit(enemy) {
+        return (this.charakter.speedY == 0 && !enemy.chickenIsDead && !enemy.endbossIsDead) || (this.charakter.speedY > 0 && enemy.name == 'Small Chicken');
+    }
+
+
+    checkCollisionFromTop(enemy) {
+        return this.charakter.isColliding(enemy) && this.charakter.speedY < 0 && enemy.speedY == 0;
+    }
+
+
+    chickenIsDead(enemy) {
+        enemy.speed = 0;
+        enemy.stopAnimation();
+        enemy.chickenIsDead = true;
+    }
+ 
 
     charakterHit() {
         if (this.charakter.currentHit) return;
@@ -183,33 +196,35 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camera_x, 0); // Forwards
         this.addObjectsToMap(this.level.backgroundObjects);
         this.ctx.translate(-this.camera_x, 0); // Back
-
-
         this.ctx.translate(this.camera_x, 0); // Forwards
+        this.drawCharakterAndObjects();
+        this.ctx.translate(-this.camera_x, 0); // Back
+        this.drawStatusBar();
+        let self = this;
+        requestAnimationFrame(() => self.draw());
+    }
+
+
+    drawCharakterAndObjects() {
         this.addToMap(this.charakter);
         this.addObjectsToMap(this.throwableObject);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
+    }
 
-        this.ctx.translate(-this.camera_x, 0); // Back
 
+    drawStatusBar() {
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
         if (this.endboss.isEndbossHurt) {
             this.addToMap(this.statusBarEndboss);
         } 
-
-        let self = this;
-        requestAnimationFrame(function () {
-            self.draw();
-        });
     }
 
 

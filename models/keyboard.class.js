@@ -10,46 +10,60 @@ class Keyboard {
     }
 
     bindBtsPressEvents() {
+        this.mobileLeft();
+        this.mobileRight();
+        this.mobileJump();
+        this.mobileThrow();
+    }
+
+
+    mobileLeft() {
         document.getElementById('btn-left').addEventListener('touchstart', (e) => {
             e.preventDefault();
             this.left = true;
         });
-
         document.getElementById('btn-left').addEventListener('touchend', (e) => {
             e.preventDefault();
             this.left = false;
         });
+    }
 
+
+    mobileRight() {
         document.getElementById('btn-right').addEventListener('touchstart', (e) => {
             e.preventDefault();
             this.right = true;
         });
-
         document.getElementById('btn-right').addEventListener('touchend', (e) => {
             e.preventDefault();
             this.right = false;
         });
+    }
 
+
+    mobileJump() {
         document.getElementById('btn-jump').addEventListener('touchstart', (e) => {
             e.preventDefault();
             this.space = true;
         });
-
         document.getElementById('btn-jump').addEventListener('touchend', (e) => {
             e.preventDefault();
             this.space = false;
         });
+    }
 
+
+    mobileThrow() {
         document.getElementById('btn-throw').addEventListener('touchstart', (e) => {
             e.preventDefault();
             this.d = true;
         });
-
         document.getElementById('btn-throw').addEventListener('touchend', (e) => {
             e.preventDefault();
             this.d = false;
         });
     }
+
 
     bindKeyPressEvents() {
         window.addEventListener('keydown', (event) => {
@@ -66,7 +80,6 @@ class Keyboard {
                 keyboard.d = true;
             }
         })
-
 
         window.addEventListener('keyup', (event) => {
             if (event.keyCode == 39) {
