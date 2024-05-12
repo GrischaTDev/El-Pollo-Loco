@@ -8,6 +8,9 @@ class MovableObject extends DrawableObject {
     currentHit = false;
 
 
+    /**
+     * Checks the gravity of an object
+     */
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -20,6 +23,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Checks whether the object is above the ground
+     * 
+     * @returns - Returns whether it is a throwable object or the character
+     */
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return true;
@@ -33,16 +41,27 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Start move right function
+     */
     moveRight() {
         this.x += this.speed;
     }
 
 
+    /**
+     * Start move left function
+     */
     moveLeft() {
         this.x -= this.speed;
     }
 
 
+    /**
+     * executes an animation and passes the images provided for it within an array
+     * 
+     * @param {img} images 
+     */
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -51,11 +70,17 @@ class MovableObject extends DrawableObject {
     }
 
     
+    /**
+     * Start jump animation
+     */
     jump() {
         this.speedY = 25;
     }
 
 
+    /**
+     * Checks whether the object collides
+     */
     isColliding(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
@@ -64,6 +89,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * transfers the damage inflicted
+     * 
+     * @param {*} damage - current damage value
+     */
     hit(damage) {
         this.energy -= damage;
         if (this.energy < 0) {
@@ -74,6 +104,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * checks when damage was last inflicted
+     * 
+     * @returns returns the time interval
+     */
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000; 
@@ -81,6 +116,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * passes the value that the energy is 0 and the object is dead
+     * 
+     * @returns sets the value of Energy to 0
+     */
     isDead() {
         return this.energy == 0;
     }

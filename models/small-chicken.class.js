@@ -22,6 +22,9 @@ class SmallChicken extends MovableObject {
     }
 
 
+    /**
+     * Start all small chicken animations with an interval
+     */
     animate() {
         setInterval(() => this.moveLeft(), 1000 / 60);
         this.walkingInterval = setInterval(() => this.moveSmallChicken(), 100);
@@ -29,12 +32,18 @@ class SmallChicken extends MovableObject {
     }
 
 
+    /**
+     * Start small chicken to move
+     */
     moveSmallChicken() {
         let i = this.currentImage % this.IMAGES_WALKING.length;
         this.playAnimation(this.IMAGES_WALKING);
     }
 
 
+    /**
+     * Stop small chicken animation
+     */
     stopAnimation() {
         this.chickenDeadSound.play();
         clearInterval(this.walkingInterval); // Stoppe das Intervall

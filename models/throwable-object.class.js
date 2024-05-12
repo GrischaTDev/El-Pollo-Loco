@@ -19,6 +19,9 @@ class ThrowableObject extends MovableObject {
     }
 
     
+    /**
+     * Transfers the current position of the bottle
+     */
     trow(x, y) {
         this.speedY = 30;
         this.applyGravity();
@@ -28,11 +31,17 @@ class ThrowableObject extends MovableObject {
     }
 
 
+    /**
+     * Starts the animation of the thrown bottle
+     */
     animate() {
         setInterval(() => this.throwBottle(), 100);
     }
 
 
+    /**
+     * Updates the current image of the thrown bottle
+     */
     throwBottle() {
         let i = this.currentImage % this.IMAGES_BOTTLE_ROTATION.length;
         this.playAnimation(this.IMAGES_BOTTLE_ROTATION);

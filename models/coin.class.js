@@ -16,10 +16,18 @@ class Coin extends MovableObject {
         this.animate();
     }
 
+
+    /**
+     * Start all animations with an interval
+     */
     animate() {
         setInterval(() => this.coinIdle(), 650);
     }
 
+
+    /**
+     * Coin idle animation
+     */
     coinIdle() {
         let i = this.currentImage % this.IMAGES_COIN.length;
         this.playAnimation(this.IMAGES_COIN);

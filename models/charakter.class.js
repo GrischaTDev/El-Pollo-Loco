@@ -86,12 +86,19 @@ class Charakter extends MovableObject {
     }
 
 
+    /**
+     * Start all animations with an interval
+     */
     animate() {
         setInterval(() => this.charakterIdle(), 300);
         setInterval(() => this.charakterMove(), 1000 / 60);
         setInterval(() => this.charakterPlay(), 80);
     }
 
+
+    /**
+     * Charakter idle animation
+     */
     charakterIdle() {
         if (this.canIdle()) {
             this.charIdle();
@@ -104,26 +111,39 @@ class Charakter extends MovableObject {
     }
 
 
+    /**
+     * Returns the query whether the character starts the idle animation
+     * 
+     * @returns - See if the character moves to the left or right
+     */
     canIdle() {
         return !this.world.keyboard.right && !this.world.keyboard.left;
     }
 
 
+    /**
+     * Start the idle animation character
+     */
     charIdle() {
         this.timeSinceLastMovement += 300;
         let i = this.currentImage % this.IMAGES_IDLE.length;
         this.playAnimation(this.IMAGES_IDLE);
     }
 
+
     /**
+     * Returns the query whether the character starts the sleep animation
      * 
-     * @returns asd
+     * @returns - Checks whether the character is in idle mode for longer than 15 seconds
      */
     canSleep() {
         return this.timeSinceLastMovement >= 15000;
     }
 
 
+    /**
+     * Start the sleep animation character
+     */
     charSleep() {
         this.playAnimation(this.IMAGES_SLEEP);
         this.sleep_sound.play();
@@ -132,6 +152,9 @@ class Charakter extends MovableObject {
     }
 
 
+    /**
+     * Charakter move animation
+     */
     charakterMove() {
         this.walking_sound.pause();
         if (this.canMoveRight())
@@ -147,11 +170,19 @@ class Charakter extends MovableObject {
     }
 
 
+    /**
+     * Returns the query whether the character starts the move right animation
+     * 
+     * @returns - See if the character moves to the right
+     */
     canMoveRight() {
         return this.world.keyboard.right && this.x < this.world.level.level_end_x;
     }
 
 
+    /**
+     * Start move right animation
+     */
     moveRight() {
         super.moveRight();
         this.otherDirection = false;
@@ -160,11 +191,19 @@ class Charakter extends MovableObject {
     }
 
 
+    /**
+     * Returns the query whether the character starts the move left animation
+     * 
+     * @returns - See if the character moves to the left
+     */
     canMoveLeft() {
         return this.world.keyboard.left && this.x > 0;
     }
 
 
+    /**
+     * Start move left animation
+     */
     moveLeft() {
         super.moveLeft();
         this.otherDirection = true;
@@ -173,11 +212,19 @@ class Charakter extends MovableObject {
     }
 
 
+    /**
+     * Returns the query whether the character starts the jump animation
+     * 
+     * @returns - check whether the space button has been printed and the character is on the floor
+     */
     canJump() {
         return this.world.keyboard.space && !this.isAboveGround();
     }
 
 
+    /**
+     * Starts the various character animations
+     */
     charakterPlay() {
         if (this.isAboveGround()) {
             if (this.speedY > 0 && this.currentImage > 3)

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/movable-object.class.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/movable-object.class.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>class MovableObject extends DrawableObject {
+    speed;
+    otherDirection = false;
+    speedY = 0;
+    acceleration = 2.5;
+    energy = 100;
+    lastHit = 0;
+    currentHit = false;
+
+
+    /**
+     * Checks the gravity of an object
+     */
+    applyGravity() {
+        setInterval(() => {
+            if (this.isAboveGround() || this.speedY > 0) {
+                this.y -= this.speedY;
+                this.speedY -= this.acceleration;
+            } else {
+                this.speedY = 0;
+            }
+        }, 1000 / 25);
+    }
+
+
+    /**
+     * Checks whether the object is above the ground
+     * 
+     * @returns - Returns whether it is a throwable object or the character
+     */
+    isAboveGround() {
+        if (this instanceof ThrowableObject) {
+            return true;
+        } else {
+            if (this instanceof Charakter) {
+                return this.y &lt; 180;
+            } else {
+                return this.y &lt; 340;
+            }
+        }
+    }
+
+
+    /**
+     * Start move right function
+     */
+    moveRight() {
+        this.x += this.speed;
+    }
+
+
+    /**
+     * Start move left function
+     */
+    moveLeft() {
+        this.x -= this.speed;
+    }
+
+
+    /**
+     * executes an animation and passes the images provided for it within an array
+     * 
+     * @param {img} images 
+     */
+    playAnimation(images) {
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
+
+    
+    /**
+     * Start jump animation
+     */
+    jump() {
+        this.speedY = 25;
+    }
+
+
+    /**
+     * Checks whether the object collides
+     */
+    isColliding(mo) {
+        return this.x + this.width > mo.x &amp;&amp;
+            this.y + this.height > mo.y &amp;&amp;
+            this.x &lt; mo.x &amp;&amp;
+            this.y + mo.y + mo.height
+    }
+
+
+    /**
+     * transfers the damage inflicted
+     * 
+     * @param {*} damage - current damage value
+     */
+    hit(damage) {
+        this.energy -= damage;
+        if (this.energy &lt; 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+
+    /**
+     * checks when damage was last inflicted
+     * 
+     * @returns returns the time interval
+     */
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000; 
+        return timepassed &lt; 0.5;
+    }
+
+
+    /**
+     * passes the value that the energy is 0 and the object is dead
+     * 
+     * @returns sets the value of Energy to 0
+     */
+    isDead() {
+        return this.energy == 0;
+    }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#backToHomescreen">backToHomescreen</a></li><li><a href="global.html#clearAllIntervals">clearAllIntervals</a></li><li><a href="global.html#closeControlInfo">closeControlInfo</a></li><li><a href="global.html#closeFullscreen">closeFullscreen</a></li><li><a href="global.html#closeopenGameMenu">closeopenGameMenu</a></li><li><a href="global.html#controlInfo">controlInfo</a></li><li><a href="global.html#controlInfo2">controlInfo2</a></li><li><a href="global.html#fullscreenOff">fullscreenOff</a></li><li><a href="global.html#fullscreenOn">fullscreenOn</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initLevel">initLevel</a></li><li><a href="global.html#initLevel2">initLevel2</a></li><li><a href="global.html#loadGameOverScreen">loadGameOverScreen</a></li><li><a href="global.html#loadStartScreen">loadStartScreen</a></li><li><a href="global.html#loadWinScreen">loadWinScreen</a></li><li><a href="global.html#muteSound">muteSound</a></li><li><a href="global.html#openFullscreen">openFullscreen</a></li><li><a href="global.html#openGameMenu">openGameMenu</a></li><li><a href="global.html#playAgain">playAgain</a></li><li><a href="global.html#playGameOverSound">playGameOverSound</a></li><li><a href="global.html#playSound">playSound</a></li><li><a href="global.html#playWinSound">playWinSound</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#startNextLevel">startNextLevel</a></li><li><a href="global.html#stopSound">stopSound</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun May 12 2024 23:06:47 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

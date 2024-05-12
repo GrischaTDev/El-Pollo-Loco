@@ -21,12 +21,20 @@ class StatusBarCoin extends DrawableObject {
         this.setPercentage(0);
     }
 
+    
+    /**
+     * Transfers the current percentage value and updates the coin status bar
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+
+    /**
+     * Checks the value of the status bar
+     */
     resolveImageIndex() {
         if (this.percentage == 0) {
             return 0;

@@ -114,12 +114,19 @@
     }
 
 
+    /**
+     * Start all animations with an interval
+     */
     animate() {
         setInterval(() => this.charakterIdle(), 300);
         setInterval(() => this.charakterMove(), 1000 / 60);
         setInterval(() => this.charakterPlay(), 80);
     }
 
+
+    /**
+     * Charakter idle animation
+     */
     charakterIdle() {
         if (this.canIdle()) {
             this.charIdle();
@@ -132,26 +139,39 @@
     }
 
 
+    /**
+     * Returns the query whether the character starts the idle animation
+     * 
+     * @returns - See if the character moves to the left or right
+     */
     canIdle() {
         return !this.world.keyboard.right &amp;&amp; !this.world.keyboard.left;
     }
 
 
+    /**
+     * Start the idle animation character
+     */
     charIdle() {
         this.timeSinceLastMovement += 300;
         let i = this.currentImage % this.IMAGES_IDLE.length;
         this.playAnimation(this.IMAGES_IDLE);
     }
 
+
     /**
+     * Returns the query whether the character starts the sleep animation
      * 
-     * @returns asd
+     * @returns - Checks whether the character is in idle mode for longer than 15 seconds
      */
     canSleep() {
         return this.timeSinceLastMovement >= 15000;
     }
 
 
+    /**
+     * Start the sleep animation character
+     */
     charSleep() {
         this.playAnimation(this.IMAGES_SLEEP);
         this.sleep_sound.play();
@@ -160,6 +180,9 @@
     }
 
 
+    /**
+     * Charakter move animation
+     */
     charakterMove() {
         this.walking_sound.pause();
         if (this.canMoveRight())
@@ -175,11 +198,19 @@
     }
 
 
+    /**
+     * Returns the query whether the character starts the move right animation
+     * 
+     * @returns - See if the character moves to the right
+     */
     canMoveRight() {
         return this.world.keyboard.right &amp;&amp; this.x &lt; this.world.level.level_end_x;
     }
 
 
+    /**
+     * Start move right animation
+     */
     moveRight() {
         super.moveRight();
         this.otherDirection = false;
@@ -188,11 +219,19 @@
     }
 
 
+    /**
+     * Returns the query whether the character starts the move left animation
+     * 
+     * @returns - See if the character moves to the left
+     */
     canMoveLeft() {
         return this.world.keyboard.left &amp;&amp; this.x > 0;
     }
 
 
+    /**
+     * Start move left animation
+     */
     moveLeft() {
         super.moveLeft();
         this.otherDirection = true;
@@ -201,11 +240,19 @@
     }
 
 
+    /**
+     * Returns the query whether the character starts the jump animation
+     * 
+     * @returns - check whether the space button has been printed and the character is on the floor
+     */
     canJump() {
         return this.world.keyboard.space &amp;&amp; !this.isAboveGround();
     }
 
 
+    /**
+     * Starts the various character animations
+     */
     charakterPlay() {
         if (this.isAboveGround()) {
             if (this.speedY > 0 &amp;&amp; this.currentImage > 3)
@@ -232,13 +279,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#backToHomescreen">backToHomescreen</a></li><li><a href="global.html#clearAllIntervals">clearAllIntervals</a></li><li><a href="global.html#closeControlInfo">closeControlInfo</a></li><li><a href="global.html#closeFullscreen">closeFullscreen</a></li><li><a href="global.html#closeopenGameMenu">closeopenGameMenu</a></li><li><a href="global.html#controlInfo">controlInfo</a></li><li><a href="global.html#controlInfo2">controlInfo2</a></li><li><a href="global.html#fullscreenOff">fullscreenOff</a></li><li><a href="global.html#fullscreenOn">fullscreenOn</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#loadGameOverScreen">loadGameOverScreen</a></li><li><a href="global.html#loadStartScreen">loadStartScreen</a></li><li><a href="global.html#loadWinScreen">loadWinScreen</a></li><li><a href="global.html#muteSound">muteSound</a></li><li><a href="global.html#openFullscreen">openFullscreen</a></li><li><a href="global.html#openGameMenu">openGameMenu</a></li><li><a href="global.html#playAgain">playAgain</a></li><li><a href="global.html#playGameOverSound">playGameOverSound</a></li><li><a href="global.html#playSound">playSound</a></li><li><a href="global.html#playWinSound">playWinSound</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#startNextLevel">startNextLevel</a></li><li><a href="global.html#stopSound">stopSound</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#backToHomescreen">backToHomescreen</a></li><li><a href="global.html#clearAllIntervals">clearAllIntervals</a></li><li><a href="global.html#closeControlInfo">closeControlInfo</a></li><li><a href="global.html#closeFullscreen">closeFullscreen</a></li><li><a href="global.html#closeopenGameMenu">closeopenGameMenu</a></li><li><a href="global.html#controlInfo">controlInfo</a></li><li><a href="global.html#controlInfo2">controlInfo2</a></li><li><a href="global.html#fullscreenOff">fullscreenOff</a></li><li><a href="global.html#fullscreenOn">fullscreenOn</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initLevel">initLevel</a></li><li><a href="global.html#initLevel2">initLevel2</a></li><li><a href="global.html#loadGameOverScreen">loadGameOverScreen</a></li><li><a href="global.html#loadStartScreen">loadStartScreen</a></li><li><a href="global.html#loadWinScreen">loadWinScreen</a></li><li><a href="global.html#muteSound">muteSound</a></li><li><a href="global.html#openFullscreen">openFullscreen</a></li><li><a href="global.html#openGameMenu">openGameMenu</a></li><li><a href="global.html#playAgain">playAgain</a></li><li><a href="global.html#playGameOverSound">playGameOverSound</a></li><li><a href="global.html#playSound">playSound</a></li><li><a href="global.html#playWinSound">playWinSound</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#startNextLevel">startNextLevel</a></li><li><a href="global.html#stopSound">stopSound</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sat May 11 2024 23:41:39 GMT+0200 (Mitteleuropäische Sommerzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun May 12 2024 23:06:47 GMT+0200 (Mitteleuropäische Sommerzeit)
 </footer>
 
 <script> prettyPrint(); </script>

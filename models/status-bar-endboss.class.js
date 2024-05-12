@@ -21,12 +21,20 @@ class StatusBarEndboss extends DrawableObject {
         this.setPercentage(100);
     }
 
+
+    /**
+     * Transfers the current percentage value and updates the endboss status bar
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+
+    /**
+     * Checks the value of the status bar
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

@@ -1,4 +1,8 @@
 let currentLevel;
+
+/**
+ * Create level 1 with all objects.
+ */
 function initLevel() {
 
     currentLevel = new Level(

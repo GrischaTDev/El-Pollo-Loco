@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: models/coin.class.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,52 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: models/coin.class.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>class Coin extends MovableObject {
+    collectSound = new Audio('audio/collect.mp3');
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
+    IMAGES_COIN = [
+        'img/8_coin/coin1.png',
+        'img/8_coin/coin2.png'
+    ];
     
+    constructor(x, y, height, width) {
+        super().loadImage('img/8_coin/coin1.png');
+        this.x = x;
+        this.y = y;
+        this.height = height;
+        this.width = width;
+        this.loadImages(this.IMAGES_COIN);
+        this.animate();
+    }
 
 
+    /**
+     * Start all animations with an interval
+     */
+    animate() {
+        setInterval(() => this.coinIdle(), 650);
+    }
 
 
-
+    /**
+     * Coin idle animation
+     */
+    coinIdle() {
+        let i = this.currentImage % this.IMAGES_COIN.length;
+        this.playAnimation(this.IMAGES_COIN);
+    }
+}</code></pre>
+        </article>
+    </section>
 
 
 
