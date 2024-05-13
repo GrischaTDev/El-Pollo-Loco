@@ -34,22 +34,6 @@ class DrawableObject {
 
 
     /**
-     * Shows a frame around the following objects to recognise collisions
-     * 
-     * @param {canvas} ctx 
-     */
-    drawFrameBorder(ctx) {
-        if (this instanceof Charakter || this instanceof Chicken || this instanceof Coin || this instanceof Bottle || this instanceof Endboss) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = "blue";
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
-
-
-    /**
      * draws the object in the canvas
      * 
      * @param {canvas} ctx 

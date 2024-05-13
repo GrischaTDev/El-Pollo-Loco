@@ -25,8 +25,14 @@ class ThrowableObject extends MovableObject {
     trow(x, y) {
         this.speedY = 30;
         this.applyGravity();
+        if (world.charakter.otherDirection) {
+            this.speedX = -10; 
+        } else {
+            this.speedX = 10;  
+        }
+
         setInterval(() => {
-            this.x += 10;
+            this.x += this.speedX;
         }, 25);
     }
 

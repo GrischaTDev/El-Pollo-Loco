@@ -80,6 +80,7 @@ class World {
         this.checkCollisionCoins();
         this.checkCollisionBottles();
         this.checkCollisionEndboss();
+        this.checkCollisionWithEndboss();
     }
 
 
@@ -131,8 +132,8 @@ class World {
     checkCollisionEnemys() {
         this.level.enemies.forEach((enemy) => {
             if (this.charakter.isColliding(enemy)) {
-                if (this.checkCollisionForHit(enemy)) {
-                    this.charakterHit();
+                if (this.checkCollisionForHit(enemy) && (enemy.name == 'Chicken' || enemy.name == 'Small Chicken')) {
+                    this.charakterHit(20);
                 }
             }
 
@@ -149,6 +150,19 @@ class World {
     }
 
 
+
+    /**
+     * Checks charakter collisions with the enemy
+     */
+    checkCollisionWithEndboss() {
+        if (this.charakter.isColliding(this.endboss)) {
+            this.charakterHit(40);
+            this.endboss.isEndbossHurt = true;
+            this.charakter.x -= 100; 
+        }
+    } 
+
+
     /**
      * Checks collisions with the enemy
      */
@@ -163,7 +177,9 @@ class World {
      * @param {object} enemy 
      */
     checkCollisionFromTop(enemy) {
-        return this.charakter.isColliding(enemy) && this.charakter.speedY < 0 && enemy.speedY == 0;
+        if (enemy.name == 'Chicken' || enemy.name == 'Small Chicken') {
+            return this.charakter.isColliding(enemy) && this.charakter.speedY < 0 && enemy.speedY == 0;
+        }
     }
 
 
@@ -184,9 +200,9 @@ class World {
      * 
      * @returns checks whether the character is currently receiving damage
      */
-    charakterHit() {
+    charakterHit(damage) {
         if (this.charakter.currentHit) return;
-        this.charakter.hit(10);
+        this.charakter.hit(damage);
         this.charakter.hurt_sound.play();
         this.charakter.hurt_sound.volume = 0.5;
         this.charakter.currentHit = true;
@@ -317,7 +333,6 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrameBorder(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

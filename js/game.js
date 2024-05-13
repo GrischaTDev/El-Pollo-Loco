@@ -1,4 +1,4 @@
-let world, canvas, startScreen, winScreen, gameMenu, mobileControls;
+let world, canvas, startScreen, winScreen, gameOverScreen, gameMenu, mobileControls;
 let backgroundMusic = false;
 let keyboard = new Keyboard();
 let startSound = new Audio('audio/start-background-sound.mp3');
@@ -15,6 +15,7 @@ function init() {
     gameMenu = document.getElementById('game-menu');
     startScreen = document.getElementById('start-screen');
     winScreen = document.getElementById('win-screen');
+    gameOverScreen = document.getElementById('gameover-screen');
     mobileControls = document.getElementById('control-mobile');
     loadStartScreen();
 }
@@ -37,6 +38,7 @@ function playAgain() {
     mobileControls.classList.add('d-none');
     canvas.classList.remove('d-none');
     winScreen.classList.add('d-none');
+    gameOverScreen.classList.add('d-none')
     world = null;
     startGame(initLevel);
 }
@@ -78,9 +80,9 @@ function loadGameOverScreen() {
     playGameOverSound();
     let ingameMenu = document.getElementById('ingame-menu');
     ingameMenu.classList.add('d-none');
+    gameOverScreen.classList.remove('d-none')
     mobileControls.classList.add('d-none');
     canvas.classList.add('d-none');
-    winScreen.classList.remove('d-none');
 }
 
 
@@ -96,6 +98,7 @@ function loadStartScreen() {
     gameMenu.classList.add('d-none');
     mobileControls.classList.add('d-none');
     winScreen.classList.add('d-none');
+    gameOverScreen.classList.add('d-none')
     startScreen.classList.remove('d-none');
 }
 
@@ -231,16 +234,6 @@ controlInfo2.addEventListener('click', (event) => {
     }
 });
 
-
-// function setStoppableInterval(fn, time) {
-//     let id = setInterval(fn, time);
-//     intervalIDs.push(id);
-// }
-
-
-// function stopGame() {
-//     intervalIDs.forEach(clearInterval);
-// }
 
 /**
  * Switch on the fullscreen

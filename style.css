@@ -32,9 +32,29 @@ h1 {
     letter-spacing: 3px;
 }
 
+.start-menu {
+    height: 480px;
+    width: 780px;
+    padding-top: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+    align-items: center;
+    background-image: url(img/9_intro_outro_screens/start/startscreen_1.png);
+    background-color: rgb(88, 88, 88);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0px 0px 24px -6px black;
+    border-radius: 10px;
+}
+
 .menus {
     height: 480px;
     width: 780px;
+    padding-top: 20px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -60,6 +80,20 @@ h1 {
 }
 
 .win-menu-btn {
+    display: flex;
+    gap: 20px;
+}
+
+.gameover-menu {
+    font-size: 46px;
+    letter-spacing: 3px;
+    font-family: 'Zabars';
+    background-image: unset;
+    background-color: rgb(88, 88, 88);
+    gap: 40px;
+}
+
+.gameover-menu-btn {
     display: flex;
     gap: 20px;
 }
@@ -182,7 +216,7 @@ canvas {
 }
 
 .legal {
-    width: 95%;
+    width: 100%;
     height: 95%;
     position: absolute;
     display: flex;
@@ -213,7 +247,6 @@ canvas {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    width: 100%;
     border-radius: 10px;
     background-color: rgba(78, 78, 78, 0.792);
     color: white;
