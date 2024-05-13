@@ -155,7 +155,7 @@ class World {
      * Checks charakter collisions with the enemy
      */
     checkCollisionWithEndboss() {
-        if (this.charakter.isColliding(this.endboss)) {
+        if (this.charakter.isColliding(this.endboss) && !this.endboss.endbossIsDead) {
             this.charakterHit(40);
             this.endboss.isEndbossHurt = true;
             this.charakter.x -= 100; 
