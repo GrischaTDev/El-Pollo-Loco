@@ -69,7 +69,7 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
-    
+
     /**
      * Start jump animation
      */
@@ -82,10 +82,10 @@ class MovableObject extends DrawableObject {
      * Checks whether the object collides
      */
     isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y + mo.y + mo.height
+        return this.x + this.width + this.offset.right > mo.x + mo.offset.left &&
+            this.y + this.height - this.offset.bottom > mo.y  &&
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+            this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
 
@@ -111,7 +111,7 @@ class MovableObject extends DrawableObject {
      */
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
-        timepassed = timepassed / 1000; 
+        timepassed = timepassed / 1000;
         return timepassed < 0.5;
     }
 

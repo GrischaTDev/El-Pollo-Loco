@@ -23,6 +23,13 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G26.png',
     ];
 
+    offset = {
+        top: 80,
+        left: 20,
+        right: -30,
+        bottom: 40
+    }
+
     animationInterval = null;
     chickenDeadSound = new Audio('audio/chicken-dead.mp3');
 

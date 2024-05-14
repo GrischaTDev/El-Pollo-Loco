@@ -44,7 +44,7 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
         gap: 10px;
         align-items: center;
         background-image: url(img/9_intro_outro_screens/start/startscreen_1.png);

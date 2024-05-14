@@ -6,8 +6,14 @@ class DrawableObject {
     img;
     imageCache = {};
     currentImage = 0;
+    offset = {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+    }
 
-    
+
     /**
      * Loads the transferred images and saves them in the img variable
      * 

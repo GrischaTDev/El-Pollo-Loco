@@ -63,6 +63,13 @@ class Charakter extends MovableObject {
         'img/2_character_pepe/5_dead/D-57.png'
     ];
 
+    offset = {
+        top: 80,
+        left: 20,
+        right: -30,
+        bottom: 20
+    }
+
     timeSinceLastMovement = 0;
     sleep_sound = new Audio('audio/snoring.m4a');
     walking_sound = new Audio('audio/running.mp3');
