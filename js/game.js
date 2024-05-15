@@ -1,4 +1,4 @@
-let world, canvas, startScreen, winScreen, gameOverScreen, gameMenu, mobileControls;
+let world, canvas, startScreen, winScreen, gameOverScreen, gameMenu, mobileControls, on, off, fullscreen;
 let backgroundMusic = false;
 let keyboard = new Keyboard();
 let startSound = new Audio('audio/start-background-sound.mp3');
@@ -17,6 +17,9 @@ function init() {
     winScreen = document.getElementById('win-screen');
     gameOverScreen = document.getElementById('gameover-screen');
     mobileControls = document.getElementById('control-mobile');
+    on = document.getElementById('fullscreen-btn-on');
+    off = document.getElementById('fullscreen-btn-off');
+    fullscreen = document.getElementById('fullscreen');
     loadStartScreen();
 }
 
@@ -239,36 +242,26 @@ controlInfo2.addEventListener('click', (event) => {
  * Switch on the fullscreen
  */
 function fullscreenOn() {
-    let on = document.getElementById('fullscreen-btn-on');
-    let off = document.getElementById('fullscreen-btn-off');
     on.classList.add('d-none');
     off.classList.remove('d-none');
-    let fullscreen = document.getElementById('fullscreen');
     fullscreen.classList.add('fullscreen');
-    openFullscreen(fullscreen);
+    openFullscreen();
 }
-
 
 /**
  * Close the fullscreen
  */
 function fullscreenOff() {
-    let on = document.getElementById('fullscreen-btn-on');
-    let off = document.getElementById('fullscreen-btn-off');
     on.classList.remove('d-none');
     off.classList.add('d-none');
-    let fullscreen = document.getElementById('fullscreen');
     fullscreen.classList.remove('fullscreen');
-    closeFullscreen(fullscreen);
+    closeFullscreen();
 }
-
 
 /**
  * Switch on the fullscreen for different browsers
- * 
- * @param {id} fullscreen 
  */
-function openFullscreen(fullscreen) {
+function openFullscreen() {
     if (fullscreen.requestFullscreen) {
         fullscreen.requestFullscreen();
     } else if (fullscreen.webkitRequestFullscreen) { /* Safari */
@@ -277,7 +270,6 @@ function openFullscreen(fullscreen) {
         fullscreen.msRequestFullscreen();
     }
 }
-
 
 /**
  * Close the fullscreen for different browsers
@@ -291,6 +283,22 @@ function closeFullscreen() {
         document.msExitFullscreen();
     }
 }
+
+/**
+ * Handle fullscreen change events
+ */
+function onFullscreenChange() {
+    if (!document.fullscreenElement) {
+        on.classList.remove('d-none');
+        off.classList.add('d-none');
+        fullscreen.classList.remove('fullscreen');
+    }
+}
+
+// Add event listeners for fullscreen change
+document.addEventListener('fullscreenchange', onFullscreenChange);
+document.addEventListener('webkitfullscreenchange', onFullscreenChange); /* Safari */
+document.addEventListener('msfullscreenchange', onFullscreenChange); /* IE11 */
 
 
 /**
